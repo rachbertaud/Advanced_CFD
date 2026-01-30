@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <fstream>
 
 //defines namespace as std so we don't have to repeat it
 using namespace std;
@@ -96,11 +95,6 @@ int main(int argc, char *argv[])
 
 	double E_inf = max_diff/max_analytical;
 	cout << "The global error, E_inf, is " << E_inf << endl;
-	
-		
-	
-	
-	
 	
 	cout << "---------------------------" << endl;
 //this ends main
