@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+using namespace std;
 
 int main(int argc, char *argv[])
 {
@@ -11,26 +12,42 @@ int main(int argc, char *argv[])
 	const int N_int = atoi(argv[1]);
 	
 	//print out result of N to confirm we are getting the N we expect
-	std::cout << "N =" << N << std::endl;
+	cout << "N =" << N << endl;
 	
 	//define pi as an unchangeable constant
-	const double pi = 4.0*std::atan(1.0); //this line was referenced from CPP Companion
+	const double pi = 4.0*atan(1.0); //this line was referenced from CPP Companion
 	
 	//define L as 2*pi
 	double L = 2*pi;
 
 	//define h as N/L
 	double h = L/N;
-	std::cout << "Checking L/N = " << L << "/" << N << " = " << h << " = h" << std::endl;
+	cout << "Checking L/N = " << L << "/" << N << " = " << h << " = h" << endl;
 
 	//------------------------------- Question 2 ----------------------------------------
 
 	
 	//define grid points
-	double x[N_int]
+	double x[N_int];
 
 	//define function points
-	double f[N]
+	double f[N_int];
+
+	//define numerical derivative array 
+	double f_numerical[N_int];
+
+	//define analytical derivative 
+	double f_analytical[N_int];
+	
+	//define 2pi/L so I don't have to write it 13 times
+	double C = (2*pi)/L; 
+
+	for(int i=0; i < N; i++){
+		x[i] = i*h; //declares the grid point by using h
+		f[i] = exp(sin(C*x[i])); //declares function we wish to evaluate the derivative of
+		f_analytical[i] = C*cos(C*x[i])*exp(sin(C*x[i])); //declares teh analytical solution to f
+	}
 
 
+//this ends main
 }
