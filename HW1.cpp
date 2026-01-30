@@ -5,7 +5,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	//------------------------------- Question 1 ----------------------------------------
-
+	cout << "---------------------------" << endl;
 	//define N using user-input in float form and in as an int > this might not be necessary and should be changed later but lets see what happens 
  
 	double N = atof(argv[1]);
@@ -48,6 +48,28 @@ int main(int argc, char *argv[])
 		f_analytical[i] = C*cos(C*x[i])*exp(sin(C*x[i])); //declares teh analytical solution to f
 	}
 
+	//------------------------------- Question 3 ----------------------------------------
 
+	for(int i = 0; i < N; i ++){
+		if(i == 0){
+			//if I'm on the left boundary, I want the last input of f
+			f_numerical[i] = (f[i + 1] - f[-1])/(2*h);
+		}
+		else if (i == (N - 1)){
+			//if I'm at my right boundary, I want my first input of f
+			f_numerical[i] = (f[0] - f[i - 1])/(2*h);
+		}
+		else{
+			//else,I just want my neighbors
+			f_numerical[i] = (f[i + 1] - f[i - 1])/(2*h);
+		}
+	}
+	
+	//------------------------------- Question 4 ----------------------------------------
+	
+	double diff_f_sol = 
+	
+	
+	cout << "---------------------------" << endl;
 //this ends main
 }
