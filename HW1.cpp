@@ -10,8 +10,7 @@ int main(int argc, char *argv[])
 	cout << "---------------------------" << endl;
 	//define N using user-input in float form and in as an int > this might not be necessary and should be changed later but lets see what happens 
  
-	double N = atof(argv[1]);
-	const int N_int = atoi(argv[1]);
+	const int N = atoi(argv[1]);
 	
 	//print out result of N to confirm we are getting the N we expect
 	cout << "N = " << N << endl;
@@ -23,23 +22,23 @@ int main(int argc, char *argv[])
 	double L = 2*pi;
 
 	//define h as N/L
-	double h = L/N;
+	double h = L/static_cast<double>(N);
 	//cout << "Checking L/N = " << L << "/" << N << " = " << h << " = h" << endl;
 
 	//------------------------------- Question 2 ----------------------------------------
 
 	
 	//define grid points
-	double x[N_int];
+	double x[N];
 
 	//define function points
-	double f[N_int];
+	double f[N];
 
 	//define numerical derivative array 
-	double f_numerical[N_int];
+	double f_numerical[N];
 
 	//define analytical derivative 
-	double f_analytical[N_int];
+	double f_analytical[N];
 	
 	//define 2pi/L so I don't have to write it 13 times
 	double C = (2*pi)/L; 
@@ -55,7 +54,7 @@ int main(int argc, char *argv[])
 	for(int i = 0; i < N; i ++){
 		if(i == 0){
 			//if I'm on the left boundary, I want the last input of f
-			f_numerical[i] = (f[i + 1] - f[-1])/(2*h);
+			f_numerical[i] = (f[i + 1] - f[N - 1])/(2*h);
 		}
 		else if (i == (N - 1)){
 			//if I'm at my right boundary, I want my first input of f
@@ -70,7 +69,7 @@ int main(int argc, char *argv[])
 	//------------------------------- Question 4 ----------------------------------------
 	
 	//declare a difference matrix for error calculation
-	double diff_f_sol[N_int]; 
+	double diff_f_sol[N]; 
 	
 	//define starting max values, can use 0 as we are taking fabs	
 	double max_diff = 0;
@@ -81,18 +80,18 @@ int main(int argc, char *argv[])
 		diff_f_sol[i] = fabs(f_analytical[i] - f_numerical[i]);
 
 		//checks to see if the current i-th entry of diff_f_sol is the maximum
-		if(fabs(diff_f_sol[i] - max_diff) > 1e-5){
+		if(diff_f_sol[i] > max_diff){
 			max_diff = diff_f_sol[i];
 		}
 
 		//determines maximum value of f_analytical
-		if(fabs(f_analytical[i] - max_analytical) > 1e-5){
+		if(fabs(f_analytical[i]) >  max_analytical){
 			max_analytical = fabs(f_analytical[i]);
 		}
 
 
 	}
-
+	
 	double E_inf = max_diff/max_analytical;
 	cout << "The global error, E_inf, is " << E_inf << endl;
 	
