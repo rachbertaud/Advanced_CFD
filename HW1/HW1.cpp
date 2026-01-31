@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
 	//define N using user-input in float form and in as an int > this might not be necessary and should be changed later but lets see what happens 
  	
 	//user input for how many times they want to run the process (for how many N)
-	const int stop = atoi(argv[1]);
-	
+	const int stop = atoi(argv[1]) - 1;
+ 	cout << "stop = " << stop << endl;	
 	//all file writing info referenced from https://stackoverflow.com/questions/25201131/writing-csv-files-from-c
 	ofstream file;
 	file.open ("HW1_Error_Data.csv"); //opens/makes data file
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
 
 	//this for loops runs through the main code for different values of N, all multiples of 16
-	for(int N = 16; N < (16*2*(stop -1) + 1); N *= 2){	
+	for(int N = 16; N < (16*pow(2,stop) + 1); N *= 2){	
 		//print out result of N to confirm we are getting the N we expect
 		cout << "N = " << N << endl;
 		
