@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
 {
 	//------------------------------- Question 1 ----------------------------------------
 	cout << "---------------------------" << endl;
-	//define N using user-input in float form and in as an int > this might not be necessary and should be changed later but lets see what happens 
  	
 	//user input for how many times they want to run the process (for how many N)
 	const int stop = atoi(argv[1]) - 1;
