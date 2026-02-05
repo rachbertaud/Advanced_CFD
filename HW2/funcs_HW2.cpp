@@ -15,22 +15,24 @@ void read_inputs(std::map<std::string, double>& variables)
 	std::ifstream inputfile;
 	inputfile.open("inputs");
 	
-	//Read first line that specifies the number of inputs 
-	std::getline(inputfile, line);
-	int num_inputs;
-	std::stringstream(line) >> num_inputs;
 
 	double value;
-
-	for(int i = 1; i <= (2*num_inputs); i++)
+	int i = 0;
+	
+	while(std::getline(inputfile, line))
 	{
-		std::getline(inputfile,line);
+		if(line=="endfile") break;
+		
 		if(i % 2 == 0){
+			std::stringstream(line) >> var_name;
+		}
+		else{
 			std::stringstream(line) >> value;
 			variables[var_name] = value;
 		}
-		else{
-			std::stringstream(line) >> var_name;
-		}
+		
+		i++;
 	}
+
+	inputfile.close();
 }
