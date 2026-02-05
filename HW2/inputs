@@ -1,6 +1,11 @@
+4; Number of inputs (user-defined)
+Nx
 16; Nx (number of cells in x)
+Ny
 32; Ny (number of cells in y)
+Lx
 2.1; Lx (domain length in x)
+Ly
 3.2; Ly (domain length in y)
 
 
