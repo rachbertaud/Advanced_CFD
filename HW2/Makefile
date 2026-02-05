@@ -5,3 +5,5 @@ HW2:
 
 clean: 
 	rm -f run_HW2
+	rm -f x.dat
+	rm -f y.dat
