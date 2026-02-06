@@ -4,7 +4,7 @@
 #include <map>		// for variable map definition
 #include "HW2.h"	// for user-defined functions
 #include <vector>	// needed for vectors
-
+#include <cmath>	// math library for RHS
 
 int main()
 {
@@ -202,5 +202,46 @@ int main()
 	COL.push_back((Ny + 1)*(Nx + 1));
 	VAL.push_back(0);
 	  
+//---------------------------PROBLEM TWO---------------------------------
+	// initalize RHS vector to zeros
+	int Ntot = Ny2*Nx2; // total num of nodes
+	std::vector<double> B(Ntot, 0.0);; // init to 0
+
+	// south/north boundary conditions
+	for(int i = 1; i <= Nx; i++)
+	{
+		// south 
+		row = i;
+		B[row] = std::cos(x[i]);
+
+		// north 
+		row = (Ny + 1)*Nx2 + i;
+		B[row] = std::cos(x[i])*std::cos(Ly);
 	
+	}
+
+	// east/west boundary conditions
+	for(int j = 1; j <= Ny; j++)
+	{
+		// west
+		row = Nx2*j;
+		B[row] = std::cos(y[j]);
+	
+		// east
+		row = Nx2*(j + 1) - 1; //don't forget the first row corner is meh
+		B[row] = std::cos(x[Lx])*std::cos(y[j]);
+		
+	}
+
+	// internal nodes
+	for (int i = 1; i <= Nx; i++)
+	{
+		for (int j = 1; j <= Ny; j++)
+		{
+			row = Nx2*j + i;
+			B[row] = std::cos(x[i])*std::cos(y[i]);
+		}
+	}
+//-------------------------PROBLEM THREE-----------------------------------
+//this ends main
 }
