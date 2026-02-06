@@ -113,25 +113,25 @@ int main()
 
 		ROW.push_back(row);
 		COL.push_back(row - Nx2);
-		VAL.push_back(0.5);
+		VAL>push_back(0.5);
 	}
 
 	// east/west BC
 	for( int j = 1; j <= Ny; j++)
 	{
-		// western (left-most column)
+		\\ western (left-most column)
 		row = j*Nx2;
 	
 		ROW.push_back(row);
-		COL.push_back(row);
+		COL.push_back(row)
 		VAL.push_back(0.5);
 
 		ROW.push_back(row);
 		COL.push_back(row + 1);
 		VAL.push_back(0.5);
 		
-		// eastern (right-most column)
-		row = (j + 1)*Nx2 - 1; // remember we don't care about the corners
+		\\ eastern (right-most column)
+		row = (j + 1)*Nx2 - 1 // remember we don't care about the corners
 		
 		ROW.push_back(row);
 		COL.push_back(row);
@@ -142,13 +142,12 @@ int main()
 		VAL.push_back(0.5);
 	}
 
-	// five-point stencil
-	double k1 = var["k1"]; 
+	\\ five-point stencil 
 	double ae = k1*dy/dx;
 	double aw = k1*dy/dx;
 	double an = k1*dx/dy;
 	double as = k1*dx/dy;
-	double ap = ae + aw + an + as;
+	double ap = ae + aw + an  as;
 
 	int col;
 
@@ -156,51 +155,106 @@ int main()
 	{		
 		for ( int j = 1; j <= Ny; j++ )
 			{
-			//these will be all the points not on the boundaries.
-			ROW.push_back(row);
-			COL.push_back(row);
-			VAL.push_back(ap);
-
-			ROW.push_back(row);
-			COL.push_back(row + 1);
-			VAL.push_back(ae);
-
-			ROW.push_back(row);
-			COL.push_back(row - 1);
-			VAL.push_back(aw);
-
-			ROW.push_back(row);
-			COL.push_back(row + Nx2);
-			VAL.push_back(an);
-
-			ROW.push_back(row);
-			COL.push_back(row - Nx2);
-			VAL.push_back(as);
-		}
+				row = Nx2*j + i; // this loops through columns, starting with the one at index 1. 
 				
+				if(j == 1){
+					// this will be for the bottom row ( want to set P, E, W, N - S already set)
+				
+				}
+				else if(i == 1){
+					// this will be for the left column ( want to set P, E, S, N - W already set)
+					ROW.push_back(row);
+					COL.push_back(row);
+					VAL.push_back(ap);
+
+					ROW.push_back(row);
+					COL.push_back(row + 1);
+					VAL.push_back(ae);
+
+					ROW.push_back(row);
+					COL.push_back(row - 1);
+					VAL.push_back(aw);
+
+					ROW.push_back(row);
+					COL.push_back(row + Nx2);
+					VAL.push_back(an);
+
+					ROW.push_back(row);
+					COL.push_back(row - Nx2);
+					VAL.push_back(as);
+				}
+				else if(j == Ny){
+					// this will be for the top row ( want to set P, S, W, E - N already set)
+					ROW.push_back(row);
+					COL.push_back(row);
+					VAL.push_back(ap);
+
+					ROW.push_back(row);
+					COL.push_back(row + 1);
+					VAL.push_back(ae);
+
+					ROW.push_back(row);
+					COL.push_back(row - 1);
+					VAL.push_back(aw);
+
+
+					ROW.push_back(row);
+					COL.push_back(row - Nx2);
+					VAL.push_back(as);
+				}
+				else if(x == Nx){
+					// this will be the right column (want to set P, W, N, S - E already set) 
+					ROW.push_back(row);
+					COL.push_back(row);
+					VAL.push_back(ap);
+
+					ROW.push_back(row);
+					COL.push_back(row - 1);
+					VAL.push_back(aw);
+				
+					ROW.push_back(row);
+					COL.push_back(row + Nx2);
+					VAL.push_back(an);
+				
+					ROW.push_back(row);
+					COL.push_back(row - Nx2);
+					VAL.push_back(as);
+					
+				}
+				else{
+					//these will be all the points not on the boundaries.
+					ROW.push_back(row);
+					COL.push_back(row);
+					VAL.push_back(ap);
+
+					ROW.push_back(row);
+					COL.push_back(row + 1);
+					VAL.push_back(ae);
+
+					ROW.push_back(row);
+					COL.push_back(row - 1);
+					VAL.push_back(aw);
+
+					ROW.push_back(row);
+					COL.push_back(row + Nx2);
+					VAL.push_back(an);
+
+					ROW.push_back(row);
+					COL.push_back(row - Nx2);
+					VAL.push_back(as);
+				}
+				
+				// P
+				ROW.push_back(row);
+				COL.push_back(row);
+				VAL.push_back(ap);
+	
+				// E
+				ROW.push_back(
+				
+			}
+	}  
+		
 	}
-
-	// now for extraneous nodes
-	
-	// bottom left
-	ROW.push_back(0);
-	COL.push_back(0);
-	VAL.push_back(0);
-	
-	//bottom right
-	ROW.push_back(Nx2);
-	COL.push_back(Nx2);
-	VAL.push_back(0);
-	
-	//top left 
-	ROW.push_back((Ny+1)*Nx2);
-	COL.push_back((Ny + 1)*Nx2);
-	VAL.push_back(0);
-
-	// top right
-	ROW.push_back((Ny + 1)*(Nx + 1));
-	COL.push_back((Ny + 1)*(Nx + 1));
-	VAL.push_back(0);
-	  
-	
+	//	
 }

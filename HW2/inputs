@@ -6,5 +6,7 @@ Lx
 4; Lx (domain length in x)
 Ly
 3.2; Ly (domain length in y)
+k1
+0.1; diffusivity value?
 endfile
 
