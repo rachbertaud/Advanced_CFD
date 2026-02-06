@@ -5,6 +5,9 @@
 #include "HW2.h"	// for user-defined functions
 #include <vector>	// needed for vectors
 #include <cmath>	// math library for RHS
+#include <Eigen/Sparse>
+#include <Eigen/Dense>
+#include <Eigen/SparseLU>
 
 int main()
 {
@@ -156,6 +159,8 @@ int main()
 	{		
 		for ( int j = 1; j <= Ny; j++ )
 			{
+			row = Nx2*j + i;
+
 			//these will be all the points not on the boundaries.
 			ROW.push_back(row);
 			COL.push_back(row);
@@ -185,22 +190,22 @@ int main()
 	// bottom left
 	ROW.push_back(0);
 	COL.push_back(0);
-	VAL.push_back(0);
+	VAL.push_back(1);
 	
 	//bottom right
-	ROW.push_back(Nx2);
-	COL.push_back(Nx2);
-	VAL.push_back(0);
+	ROW.push_back(Nx2 - 1);
+	COL.push_back(Nx2 - 1);
+	VAL.push_back(1);
 	
 	//top left 
 	ROW.push_back((Ny+1)*Nx2);
 	COL.push_back((Ny + 1)*Nx2);
-	VAL.push_back(0);
+	VAL.push_back(1);
 
 	// top right
-	ROW.push_back((Ny + 1)*(Nx + 1));
-	COL.push_back((Ny + 1)*(Nx + 1));
-	VAL.push_back(0);
+	ROW.push_back(Nx2*Ny2 - 1);
+	COL.push_back(Nx2*Ny2 - 1);
+	VAL.push_back(1);
 	  
 //---------------------------PROBLEM TWO---------------------------------
 	// initalize RHS vector to zeros
@@ -243,5 +248,78 @@ int main()
 		}
 	}
 //-------------------------PROBLEM THREE-----------------------------------
+	
+	Eigen::VectorXd RHS(Ntot);
+	for (int i = 0; i < Ntot; i++)
+	{
+		RHS[i] = B[i];
+	}
+
+	// To define A
+	int nnz = ROW.size();
+	
+	std::ofstream ROWF;
+	ROWF.open("row.dat");
+	
+	std::ofstream COLF;
+	COLF.open("col.dat");
+
+	std::ofstream VALF;
+	VALF.open("val.dat");
+
+	for (int i = 0; i < nnz; i++){
+		ROWF << ROW[i] << "\n";
+		COLF << COL[i] << "\n";
+		VALF << VAL[i] << "\n";
+	}
+
+	ROWF.close();
+	COLF.close();
+	VALF.close();
+
+	
+	std::vector<Eigen::Triplet<double>> triplets;
+	triplets.reserve(nnz);
+
+	for (int k = 0; k < nnz; k++)
+	{
+		triplets.push_back(Eigen::Triplet<double>(
+			ROW[k],
+			COL[k],
+			VAL[k]
+		));
+	}
+
+	Eigen::SparseMatrix<double> A(Ny2*Nx2, Nx2*Ny2);
+	A.setFromTriplets(triplets.begin(), triplets.end());
+	
+
+	// Create Solver
+	Eigen::SparseLU<Eigen::SparseMatrix<double>> solver;
+
+	// Factorize matrix
+	solver.compute(A);
+	if(solver.info() != Eigen::Success)
+	{
+		std::cerr << "Decomposition failed! \n";
+		return -1;
+	}
+
+	// Solve the system
+	Eigen::VectorXd C = solver.solve(RHS);
+	if(solver.info() != Eigen::Success)
+	{
+		std::cerr << "Solving failed! \n";
+		return -1;
+	}
+
+	// Save the solution to file
+	std::ofstream cfile("c.dat");
+	for (int i = 0; i < Ntot; i++)
+	{
+		cfile << C[i] << "\n";
+	}
+	cfile.close();
+
 //this ends main
 }
