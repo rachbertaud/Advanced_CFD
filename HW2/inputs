@@ -1,12 +1,12 @@
 Nx
-2; Nx (number of cells in x)
+32; Nx (number of cells in x)
 Ny
-2; Ny (number of cells in y)
+32; Ny (number of cells in y)
 Lx
 1; Lx (domain length in x)
 Ly
 1; Ly (domain length in y)
 k1
-0.1; diffusivity value?
+1; diffusivity value?
 endfile
 

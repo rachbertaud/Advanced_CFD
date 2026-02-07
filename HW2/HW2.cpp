@@ -168,19 +168,19 @@ int main()
 
 			ROW.push_back(row);
 			COL.push_back(row + 1);
-			VAL.push_back(ae);
+			VAL.push_back(-ae);
 
 			ROW.push_back(row);
 			COL.push_back(row - 1);
-			VAL.push_back(aw);
+			VAL.push_back(-aw);
 
 			ROW.push_back(row);
 			COL.push_back(row + Nx2);
-			VAL.push_back(an);
+			VAL.push_back(-an);
 
 			ROW.push_back(row);
 			COL.push_back(row - Nx2);
-			VAL.push_back(as);
+			VAL.push_back(-as);
 		}
 				
 	}
@@ -234,7 +234,7 @@ int main()
 	
 		// east
 		row = Nx2*(j + 1) - 1; //don't forget the first row corner is meh
-		B[row] = std::cos(x[Lx])*std::cos(y[j]);
+		B[row] = std::cos(Lx)*std::cos(y[j]);
 		
 	}
 
@@ -244,9 +244,16 @@ int main()
 		for (int j = 1; j <= Ny; j++)
 		{
 			row = Nx2*j + i;
-			B[row] = std::cos(x[i])*std::cos(y[i]);
+			B[row] =dx*dy*2*std::cos(x[i])*std::cos(y[j]);
 		}
 	}
+	
+	std::ofstream bfile("b.dat");
+	for (int i = 0; i < Ntot; i++)
+	{
+		bfile << B[i] << "\n";
+	}
+	bfile.close();
 //-------------------------PROBLEM THREE-----------------------------------
 	
 	Eigen::VectorXd RHS(Ntot);
@@ -257,6 +264,8 @@ int main()
 
 	// To define A
 	int nnz = ROW.size();
+
+	/* uncomment this for debugging	
 	
 	std::ofstream ROWF;
 	ROWF.open("row.dat");
@@ -276,6 +285,8 @@ int main()
 	ROWF.close();
 	COLF.close();
 	VALF.close();
+	
+	*/
 
 	
 	std::vector<Eigen::Triplet<double>> triplets;
@@ -321,5 +332,9 @@ int main()
 	}
 	cfile.close();
 
+	Eigen::MatrixXd A_dense = Eigen::MatrixXd(A);
+	std::ofstream matfile("matrix_A_dense.txt");
+	matfile << A_dense;
+	matfile.close();
 //this ends main
 }
