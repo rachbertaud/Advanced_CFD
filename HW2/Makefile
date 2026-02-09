@@ -7,7 +7,8 @@ clean:
 	rm -f run_HW2
 	rm -f x.dat
 	rm -f y.dat
-	rm -f row.dat
-	rm -f col.dat
-	rm -f val.dat
 	rm -f c.dat
+
+clean_data:
+	rm -f Err_vs_N.dat
+

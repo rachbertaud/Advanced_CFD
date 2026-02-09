@@ -1,7 +1,7 @@
 Nx
-32; Nx (number of cells in x)
+400; Nx (number of cells in x)
 Ny
-32; Ny (number of cells in y)
+400; Ny (number of cells in y)
 Lx
 1; Lx (domain length in x)
 Ly

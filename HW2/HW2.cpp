@@ -248,12 +248,17 @@ int main()
 		}
 	}
 	
+	/*
+
 	std::ofstream bfile("b.dat");
 	for (int i = 0; i < Ntot; i++)
 	{
 		bfile << B[i] << "\n";
 	}
 	bfile.close();
+
+	*/
+
 //-------------------------PROBLEM THREE-----------------------------------
 	
 	Eigen::VectorXd RHS(Ntot);
@@ -331,10 +336,15 @@ int main()
 		cfile << C[i] << "\n";
 	}
 	cfile.close();
+	
+	/*
 
 	Eigen::MatrixXd A_dense = Eigen::MatrixXd(A);
 	std::ofstream matfile("matrix_A_dense.txt");
 	matfile << A_dense;
 	matfile.close();
+	
+	*/
+
 //this ends main
 }

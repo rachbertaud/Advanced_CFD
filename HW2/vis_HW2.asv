@@ -46,7 +46,7 @@ title("analytical")
 colorbar()
 
 
-err = max(max(abs(c_num_NB - c_an_NB)))/max(max(abs(c_an_NB)))
+err = max(max(abs(c_num_NB - c_an_NB)))/max(max(abs(c_an_NB)));
 
 
 
