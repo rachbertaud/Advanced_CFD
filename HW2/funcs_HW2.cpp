@@ -44,3 +44,47 @@ double var_therm_cond(double x, double y){
 	
 	return km;
 }
+
+
+double find_r(double x, double y, double Lx, double Ly){
+
+        double r;
+
+        double x_diff = std::pow((x - (Lx/2)), 2);
+	double y_diff = std::pow((y - (Ly/2)),2);
+
+        r = std::sqrt(x_diff + y_diff);	
+	//std::cout << "r = " << r << "(x, y) : " << x << ", " << y << std::endl;	
+	return r;
+}
+
+double fuel_therm_cond(double x, double y, double Lx, double Ly, double R1, double R2, double k1, double k2, double k3){
+	
+
+	double r = find_r(x, y, Lx, Ly);
+	
+	double k = k3; 
+
+	if ( r < R1 )
+	{
+		k = k1;
+	}
+	else if ( r < R2 )
+	{
+		k = k2;
+	}
+
+	return k;
+
+}
+
+double source(double r, double a, double b, double R1){
+	
+	double source_val = a*(1 + b*(std::pow((r/R1),2)));
+
+	if ( r > R1 ) {
+		source_val = 0;
+	}
+
+	return source_val;
+}

@@ -1,5 +1,5 @@
 HW2:
-	g++ -I/Users/rachelbertaud/code/eigen-5.0.0 -o run_HW2 HW2.cpp funcs_HW2.cpp
+	g++ -I/Users/rachelbertaud/code/eigen-5.0.0 -o run_HW2 HW2_Final.cpp funcs_HW2.cpp
 	./run_HW2
 
 
