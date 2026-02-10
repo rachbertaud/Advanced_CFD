@@ -1,7 +1,11 @@
 clear
 
 
+addpath /Users/rachelbertaud/code/cmap-master;
+addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 
+plot_settings(1);
+cm = "internet";
 %%
 x = readmatrix("x.dat");
 y = readmatrix("y.dat");

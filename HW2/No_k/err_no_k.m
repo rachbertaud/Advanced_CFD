@@ -15,6 +15,12 @@
 % Err_inf = [5.0149e-05 1.2997e-05 3.6082e-06 1.2758e-06];
 
 %% WITH KM
+
+addpath /Users/rachelbertaud/code/MATLAB_Settings/;
+
+plot_settings(1);
+
+
 N = [50 100 200 400];
 Err_inf = [0.0020 4.9312e-04 1.2375e-04 3.1494e-05];
 % 100 4.9312e-04
