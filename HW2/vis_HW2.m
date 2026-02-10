@@ -1,4 +1,3 @@
-clc
 clear
 
 
@@ -13,8 +12,11 @@ c = readmatrix("c.dat");
 Nx = length(x);
 Ny = length(y);
 
+Nx2 = Nx + 2; 
+Ny2 = Ny + 2;
 
-c_num = reshape(c, Ny, Nx);
+
+c_num = reshape(c, Ny, Nx)';
 c_mat = zeros(Ny,Nx);
 
 for i = 0:1:(Ny - 1)
@@ -32,19 +34,35 @@ end
 
 
 %%
-c_num_NB = c_num(2:(Ny - 1), 2:(Nx - 1));
-c_an_NB = c_an(2:(Ny - 1), 2:(Nx - 1));
+c_num_NB = c_num(2:Ny - 1, 2:Nx - 1);
+c_an_NB = c_an(2:Ny - 1, 2:Nx - 1);
+X_NB = X(2:Ny - 1, 2:Nx - 1);
+Y_NB = Y(2:Ny - 1, 2:Nx - 1);
+
 
 figure(1)
-pcolor(c_num_NB)
+surf(X_NB,Y_NB,c_num_NB)
 title("Numerical")
+xlabel("x")
+ylabel("y")
+zlim([-1,1])
 colorbar()
 
 figure(2)
-pcolor(c_an_NB)
+surf(X_NB,Y_NB,c_an_NB)
+zlim([-1,1])
+xlabel("x")
+ylabel("y")
 title("analytical")
 colorbar()
 
+%%
+diff_C = abs(c_num_NB - c_an_NB);
+figure(3)
+surf(X_NB,Y_NB, diff_C)
+xlabel("x")
+ylabel("y")
+%%
 
 err = max(max(abs(c_num_NB - c_an_NB)))/max(max(abs(c_an_NB)))
 

@@ -153,13 +153,32 @@ int main()
 	double as = k1*dx/dy;
 	double ap = ae + aw + an + as;
 
-	int col;
+	double kmp;
+	double kme;
+	double kmw;
+	double kmn;
+	double kms;
+
+
 
 	for ( int i = 1; i <= Nx; i++ ) 
 	{		
 		for ( int j = 1; j <= Ny; j++ )
 			{
 			row = Nx2*j + i;
+			
+			kme = var_therm_cond(xf[i], y[j]);
+			kmw = var_therm_cond(xf[i - 1], y[j]);
+			kmn = var_therm_cond(x[i], yf[j]);
+			kms = var_therm_cond(x[i], yf[j - 1]);
+			kmp = var_therm_cond(x[i], y[j]);
+
+			ae = kme*k1*dy/dx;
+			aw = kmw*k1*dy/dx;
+			an = kmn*k1*dx/dy;
+			as = kms*k1*dx/dy;
+			ap = ae + aw + an + as;
+
 
 			//these will be all the points not on the boundaries.
 			ROW.push_back(row);
@@ -170,6 +189,7 @@ int main()
 			COL.push_back(row + 1);
 			VAL.push_back(-ae);
 
+	
 			ROW.push_back(row);
 			COL.push_back(row - 1);
 			VAL.push_back(-aw);
@@ -181,6 +201,7 @@ int main()
 			ROW.push_back(row);
 			COL.push_back(row - Nx2);
 			VAL.push_back(-as);
+			
 		}
 				
 	}
@@ -221,7 +242,7 @@ int main()
 
 		// north 
 		row = (Ny + 1)*Nx2 + i;
-		B[row] = std::cos(x[i])*std::cos(Ly);
+		B[row] = std::cos(x[i])*std::cos(Ly); // *(1 + 0.5*std::sin(x[i])*std::sin(Ly));
 	
 	}
 
@@ -234,7 +255,7 @@ int main()
 	
 		// east
 		row = Nx2*(j + 1) - 1; //don't forget the first row corner is meh
-		B[row] = std::cos(Lx)*std::cos(y[j]);
+		B[row] = std::cos(Lx)*std::cos(y[j]);// *(1 + 0.5*std::sin(Lx)*std::sin(y[j]));
 		
 	}
 
@@ -244,7 +265,7 @@ int main()
 		for (int j = 1; j <= Ny; j++)
 		{
 			row = Nx2*j + i;
-			B[row] =dx*dy*2*std::cos(x[i])*std::cos(y[j]);
+			B[row] =dx*dy*2*std::cos(x[i])*std::cos(y[j])*(1 + std::sin(x[i])*std::sin(y[j]));
 		}
 	}
 	

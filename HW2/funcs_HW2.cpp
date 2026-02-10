@@ -36,3 +36,11 @@ void read_inputs(std::map<std::string, double>& variables)
 
 	inputfile.close();
 }
+
+double var_therm_cond(double x, double y){
+
+	double km; 
+	km = 1 + 0.5*std::sin(x)*std::sin(y);
+	
+	return km;
+}

@@ -1,11 +1,11 @@
 Nx
-400; Nx (number of cells in x)
+50; Nx (number of cells in x)
 Ny
-400; Ny (number of cells in y)
+50; Ny (number of cells in y)
 Lx
-1; Lx (domain length in x)
+6.283185307179586; Lx (domain length in x)
 Ly
-1; Ly (domain length in y)
+6.283185307179586; Ly (domain length in y)
 k1
 1; diffusivity value?
 endfile
