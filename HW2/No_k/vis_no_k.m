@@ -50,7 +50,13 @@ title("Analytical Solution")
 colorbar()
 saveas(f, "HW2_Analytical_No_K.png", 'png')
 
+f = figure(3);
+theme(f,"light");
+surf(X_NB,Y_NB,abs(c_an_NB - c_num_NB))
+xlabel("x")
+ylabel("y")
+title("Local Error")
+colorbar()
+saveas(f, "HW2_Local_Err_No_K.png", 'png')
 
-%%
 
-err = max(max(abs(c_num_NB - c_an_NB)))/max(max(abs(c_an_NB)))

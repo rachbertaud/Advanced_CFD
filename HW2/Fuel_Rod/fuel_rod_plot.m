@@ -38,20 +38,20 @@ surf(X_NB,Y_NB,c_num_NB)
 colormap(cm)
 xlabel("$$x$$")
 ylabel("$$y$$")
-zlabel("$$C_{N}$$");
+zlabel("$$T(x,y)$$");
 view(3)
 colorbar()
 hold off
 saveas(f1, "Fuel_Rod_3D.png", 'png')
-
+%%
 f2 = figure(2);
 theme(f2,"light");
 hold on
 pcolor(X_NB,Y_NB,c_num_NB)
 shading interp
 colormap(cm)
-viscircles([0.015/2, 0.015/2], 0.004 ,'Color',[227/255,159/255,246/255])
-viscircles([0.015/2, 0.015/2], 0.005,'Color',[227/255,159/255,246/255])
+viscircles([0.015/2, 0.015/2], 0.004 ,'Color',[1/255,255/255,1/255])
+viscircles([0.015/2, 0.015/2], 0.005,'Color',[1/255,255/255,1/255])
 xlabel("$$x$$")
 ylabel("$$y$$")
 colorbar()

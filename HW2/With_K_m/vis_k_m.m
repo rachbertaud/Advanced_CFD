@@ -54,5 +54,13 @@ title("Analytical Solution")
 colorbar()
 saveas(f, "HW2_Analytical_With_Km.png", 'png')
 
+f = figure(3);
+theme(f,"light");
+surf(X_NB,Y_NB,abs(c_an_NB - c_num_NB))
+xlabel("x")
+ylabel("y")
+title("Local Error")
+colorbar()
+saveas(f, "HW2_Local_Err_With_Km.png", 'png')
 
 
