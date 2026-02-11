@@ -4,6 +4,8 @@ A = readmatrix("HW1_Error_Data.csv");
 %%
 close all
 
+plot_settings(1)
+
 N = A(:,1);
 Err_inf = A(:,2);
 
