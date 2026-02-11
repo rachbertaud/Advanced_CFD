@@ -1,0 +1,26 @@
+Nx
+100; Nx (number of cells in x)
+Ny
+100; Ny (number of cells in y)
+Lx
+0.015; Lx (domain length in x)
+Ly
+0.015; Ly (domain length in y)
+R1
+0.004;
+R2
+0.005;
+k1
+2.0; diffusivity value?
+k2
+15.0;
+k3
+0.6;
+a
+1.0e7;
+b
+1.0;
+Tc
+300.0;
+endfile
+
