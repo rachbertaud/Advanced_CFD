@@ -1,0 +1,10 @@
+Nx
+512; Nx (number of cells in x)
+Ny
+512; Ny (number of cells in y)
+Lx
+6.28; Lx (domain length in x)
+Ly
+6.28; Ly (domain length in y)
+endfile
+

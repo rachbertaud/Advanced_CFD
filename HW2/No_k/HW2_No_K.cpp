@@ -12,24 +12,16 @@
 int main(int argc, char *argv[])
 {
 	std::map<std::string, double> var;
-	int input_flag = atoi(argv[1]);
+	int input_flag = atoi(argv[1]);	
 
 	read_inputs(var, input_flag);
-
 
 
 	int Nx = int(var["Nx"]);
 	int Ny = int(var["Ny"]);
 	double Lx = var["Lx"];
 	double Ly = var["Ly"];
-	double R1 = var["R1"];
-	double R2 = var["R2"];
-	double k1 = var["k1"];
-	double k2 = var["k2"];
-	double k3 = var["k3"];
-	double a = var["a"];
-	double b = var["b"];
-	double Tc = var["Tc"];
+
 
 	std::cout << "--------INPUTS---------" << std::endl;
 	for(const auto& pair : var)
@@ -75,8 +67,8 @@ int main(int argc, char *argv[])
 	
 	std::ofstream xfile; 
 	std::ofstream yfile; 
-	xfile.open("Fuel_Rod/x_Fuel_Rod.dat");
-	yfile.open("Fuel_Rod/y_Fuel_Rod.dat");
+	xfile.open("No_k/x_No_K.dat");
+	yfile.open("No_k/y_No_K.dat");
 
 	for (int i = 0; i < (Nx + 2); i++)
 	{
@@ -155,18 +147,11 @@ int main(int argc, char *argv[])
 	}
 
 	// five-point stencil
-	double ae = dy/dx;
+ 	double ae = dy/dx;
 	double aw = dy/dx;
 	double an = dx/dy;
 	double as = dx/dy;
 	double ap = ae + aw + an + as;
-
-	double kp;
-	double ke;
-	double kw;
-	double kn;
-	double ks;
-
 
 
 	for ( int i = 1; i <= Nx; i++ ) 
@@ -174,18 +159,6 @@ int main(int argc, char *argv[])
 		for ( int j = 1; j <= Ny; j++ )
 			{
 			row = Nx2*j + i;
-			
-			ke = fuel_therm_cond(xf[i], y[j], Lx, Ly, R1, R2, k1, k2, k3);
-			kw = fuel_therm_cond(xf[i - 1], y[j], Lx, Ly, R1, R2, k1, k2, k3);
-			kn = fuel_therm_cond(x[i], yf[j], Lx, Ly, R1, R2, k1, k2, k3);
-			ks = fuel_therm_cond(x[i], yf[j - 1], Lx, Ly, R1, R2, k1, k2, k3);
-
-			ae = ke*dy/dx;
-			aw = kw*dy/dx;
-			an = kn*dx/dy;
-			as = ks*dx/dy;
-			ap = ae + aw + an + as;
-
 
 			//these will be all the points not on the boundaries.
 			ROW.push_back(row);
@@ -245,11 +218,11 @@ int main(int argc, char *argv[])
 	{
 		// south 
 		row = i;
-		B[row] = Tc;
+		B[row] = std::cos(x[i]);
 
 		// north 
 		row = (Ny + 1)*Nx2 + i;
-		B[row] = Tc;
+		B[row] = std::cos(x[i])*std::cos(Ly);
 	
 	}
 
@@ -258,14 +231,13 @@ int main(int argc, char *argv[])
 	{
 		// west
 		row = Nx2*j;
-		B[row] = Tc;
+		B[row] = std::cos(y[j]);
 	
 		// east
 		row = Nx2*(j + 1) - 1; //don't forget the first row corner is meh
-		B[row] = Tc;
+		B[row] = std::cos(Lx)*std::cos(y[j]);
 		
 	}
-
 
 	// internal nodes
 	for (int i = 1; i <= Nx; i++)
@@ -273,10 +245,7 @@ int main(int argc, char *argv[])
 		for (int j = 1; j <= Ny; j++)
 		{
 			row = Nx2*j + i;
-			double r = find_r(x[i],y[j],Lx,Ly);
-			double source_term = source(r, a, b, R1);
-			
-			B[row] =dx*dy*source_term;
+			B[row] =dx*dy*2*std::cos(x[i])*std::cos(y[j]);
 		}
 	}
 	
@@ -328,12 +297,12 @@ int main(int argc, char *argv[])
 	}
 
 	// Save the solution to file
-	std::ofstream cfile("Fuel_Rod/c_Fuel_Rod.dat");
+	std::ofstream cfile("No_k/c_No_K.dat");
 	for (int i = 0; i < Ntot; i++)
 	{
 		cfile << C[i] << "\n";
 	}
 	cfile.close();
-	
+
 //this ends main
 }

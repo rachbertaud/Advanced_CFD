@@ -5,7 +5,7 @@
 #include <map>		// for variable map definition
 #include "HW2.h"
 
-void read_inputs(std::map<std::string, double>& variables)
+void read_inputs(std::map<std::string, double>& variables, int input_flag)
 {
 	//define a string 
 	std::string line;
@@ -13,9 +13,18 @@ void read_inputs(std::map<std::string, double>& variables)
 
 	//open the input file 
 	std::ifstream inputfile;
-	inputfile.open("inputs");
-	
-
+	if(input_flag == 1)
+	{
+		inputfile.open("inputs_error");
+	}
+	else if(input_flag == 2)
+	{
+		inputfile.open("inputs_base");
+	}
+	else
+	{
+		inputfile.open("inputs");
+	}
 	double value;
 	int i = 0;
 	

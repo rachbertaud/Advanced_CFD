@@ -1,12 +1,18 @@
 clear
-
 addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 plot_settings(1);
 
-%%
-x = readmatrix("x_No_K.dat");
-y = readmatrix("y_No_K.dat");
-c = readmatrix("c_No_K.dat");
+
+%% With K
+x = readmatrix("x_with_km.dat");
+y = readmatrix("y_with_km.dat");
+c = readmatrix("c_with_km.dat");
+
+%% Without K
+
+% x = readmatrix("x_No_K.dat");
+% y = readmatrix("y_No_K.dat");
+% c = readmatrix("c_No_K.dat");
 
 [X,Y] = meshgrid(x,y);
 
@@ -32,23 +38,19 @@ X_NB = X(2:Ny - 1, 2:Nx - 1);
 Y_NB = Y(2:Ny - 1, 2:Nx - 1);
 
 
-f = figure(1);
-theme(f,"light");
+figure(1)
 surf(X_NB,Y_NB,c_num_NB)
-title("Numerical Solution")
+title("Numerical")
 xlabel("x")
 ylabel("y")
 colorbar()
-saveas(f, "HW2_Numerical_No_K.png", 'png')
 
-f = figure(2);
-theme(f,"light");
+figure(2)
 surf(X_NB,Y_NB,c_an_NB)
 xlabel("x")
 ylabel("y")
-title("Analytical Solution")
+title("analytical")
 colorbar()
-saveas(f, "HW2_Analytical_No_K.png", 'png')
 
 
 %%

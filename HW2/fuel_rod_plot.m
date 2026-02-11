@@ -20,10 +20,7 @@ Ny = length(y);
 Lx = 0.015;
 
 
-%%
-
-
-c_num = reshape(c, Ny, Nx)';
+c_num = reshape(c, Ny, Nx);
 
 c_num_NB = c_num(2:Ny - 1, 2:Nx - 1);
 X_NB = X(2:Ny - 1, 2:Nx - 1);
@@ -42,7 +39,6 @@ zlabel("$$C_{N}$$");
 view(3)
 colorbar()
 hold off
-saveas(f1, "Fuel_Rod_3D.png", 'png')
 
 f2 = figure(2);
 theme(f2,"light");
@@ -50,13 +46,12 @@ hold on
 pcolor(X_NB,Y_NB,c_num_NB)
 shading interp
 colormap(cm)
-viscircles([0.015/2, 0.015/2], 0.004 ,'Color',[227/255,159/255,246/255])
-viscircles([0.015/2, 0.015/2], 0.005,'Color',[227/255,159/255,246/255])
+viscircles([0.015/2, 0.015/2], 0.004)
+viscircles([0.015/2, 0.015/2], 0.005)
 xlabel("$$x$$")
 ylabel("$$y$$")
 colorbar()
 hold off
-saveas(f2, "Fuel_Rod_Birds_Eye.png", 'png')
 %%
 
 f3 = figure(3);
@@ -74,7 +69,6 @@ xr.EdgeAlpha = 1;
 xr.LineWidth = 2;
 xlabel("y")
 ylabel("T")
-saveas(f3, "TvsY.png", 'png')
 
 
 

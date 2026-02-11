@@ -1,31 +1,24 @@
 clear
 
 
-addpath /Users/rachelbertaud/code/cmap-master;
 addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 
 plot_settings(1);
-cm = "internet";
+
 %%
-x = readmatrix("x.dat");
-y = readmatrix("y.dat");
-c = readmatrix("c.dat");
+
+x = readmatrix("x_with_km.dat");
+y = readmatrix("y_with_km.dat");
+c = readmatrix("c_with_km.dat");
+
+
 
 [X,Y] = meshgrid(x,y);
 
 Nx = length(x);
 Ny = length(y);
 
-Nx2 = Nx + 2; 
-Ny2 = Ny + 2;
-
-
-c_num = reshape(c, Ny, Nx)';
-c_mat = zeros(Ny,Nx);
-
-for i = 0:1:(Ny - 1)
-    c_mat((Ny - i), :) = c_num((i+1),:);
-end
+c_num = reshape(c, Ny, Nx);
 
 c_an = zeros(Ny, Nx);
 
@@ -43,87 +36,23 @@ c_an_NB = c_an(2:Ny - 1, 2:Nx - 1);
 X_NB = X(2:Ny - 1, 2:Nx - 1);
 Y_NB = Y(2:Ny - 1, 2:Nx - 1);
 
-
-figure(1)
+f = figure(1);
+theme(f,"light");
 surf(X_NB,Y_NB,c_num_NB)
-title("Numerical")
+title("Numerical Solution")
 xlabel("x")
 ylabel("y")
-zlim([-1,1])
 colorbar()
+saveas(f, "HW2_Numerical_With_Km.png", 'png')
 
-figure(2)
+f = figure(2);
+theme(f,"light");
 surf(X_NB,Y_NB,c_an_NB)
-zlim([-1,1])
 xlabel("x")
 ylabel("y")
-title("analytical")
+title("Analytical Solution")
 colorbar()
-
-%%
-diff_C = abs(c_num_NB - c_an_NB);
-figure(3)
-surf(X_NB,Y_NB, diff_C)
-xlabel("x")
-ylabel("y")
-%%
-
-err = max(max(abs(c_num_NB - c_an_NB)))/max(max(abs(c_an_NB)))
+saveas(f, "HW2_Analytical_With_Km.png", 'png')
 
 
-
-
-
-
-
-%% Uncomment this to spy A, make sure you change Nx and Ny
-% rows = readmatrix("row.dat");
-% rows = rows + 1;
-% 
-% col = readmatrix("col.dat");
-% col = col + 1;
-% 
-% val = ones(length(rows), 1);
-% 
-% A = sparse(rows, col, val, 16, 16);
-% 
-% spy(A)
-
-%%
-% 
-% A = readmatrix("matrix_A_dense.txt");
-% 
-% spy(A)
-
-% b_bruh = reshape(b_an, Ny, Nx);
-% b_huh = zeros(Ny, Nx);
-% 
-% for i = 0:1:(Ny - 1)
-%     b_huh((Ny - i), :) = b_bruh((i+1),:);
-% end
-
-% b_an(row) = 2*cos(x(i))*cos(y(j));
-% 
-% ccc = A\b_an;
-% 
-% cc = reshape(ccc, Ny, Nx);
-% 
-% b_mat = zeros(Ny, Nx);
-% b_check = reshape(b, Nx, Ny)';
-% 
-% 
-% for i = 0:1:(Ny - 1)
-%     b_mat((Ny - i), :) = b_check((i+1),:);
-% end
-% 
-% b_fcn = @(x,y) -2*cos(x)*cos(y);
-% 
-% b_an = zeros((Nx*Ny), 1);
-% 
-% % for i = 1:1:(Nx*Ny)
-% %     b_an(i) = cos(x(i))*cos(y(i)) 
-
-% b_num = reshape(b, Ny, Nx);
-
-% b = readmatrix("b.dat");
 

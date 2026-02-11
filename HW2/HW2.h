@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-void read_inputs(std::map<std::string, double>& variables);
+void read_inputs(std::map<std::string, double>& variables, int input_flag);
 
 double var_therm_cond(double x, double y);
 

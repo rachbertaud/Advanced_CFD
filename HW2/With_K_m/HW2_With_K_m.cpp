@@ -17,19 +17,10 @@ int main(int argc, char *argv[])
 	read_inputs(var, input_flag);
 
 
-
 	int Nx = int(var["Nx"]);
 	int Ny = int(var["Ny"]);
 	double Lx = var["Lx"];
 	double Ly = var["Ly"];
-	double R1 = var["R1"];
-	double R2 = var["R2"];
-	double k1 = var["k1"];
-	double k2 = var["k2"];
-	double k3 = var["k3"];
-	double a = var["a"];
-	double b = var["b"];
-	double Tc = var["Tc"];
 
 	std::cout << "--------INPUTS---------" << std::endl;
 	for(const auto& pair : var)
@@ -75,8 +66,8 @@ int main(int argc, char *argv[])
 	
 	std::ofstream xfile; 
 	std::ofstream yfile; 
-	xfile.open("Fuel_Rod/x_Fuel_Rod.dat");
-	yfile.open("Fuel_Rod/y_Fuel_Rod.dat");
+	xfile.open("With_K_m/x_with_km.dat");
+	yfile.open("With_K_m/y_with_km.dat");
 
 	for (int i = 0; i < (Nx + 2); i++)
 	{
@@ -161,11 +152,11 @@ int main(int argc, char *argv[])
 	double as = dx/dy;
 	double ap = ae + aw + an + as;
 
-	double kp;
-	double ke;
-	double kw;
-	double kn;
-	double ks;
+	double kmp;
+	double kme;
+	double kmw;
+	double kmn;
+	double kms;
 
 
 
@@ -175,15 +166,16 @@ int main(int argc, char *argv[])
 			{
 			row = Nx2*j + i;
 			
-			ke = fuel_therm_cond(xf[i], y[j], Lx, Ly, R1, R2, k1, k2, k3);
-			kw = fuel_therm_cond(xf[i - 1], y[j], Lx, Ly, R1, R2, k1, k2, k3);
-			kn = fuel_therm_cond(x[i], yf[j], Lx, Ly, R1, R2, k1, k2, k3);
-			ks = fuel_therm_cond(x[i], yf[j - 1], Lx, Ly, R1, R2, k1, k2, k3);
+			kme = var_therm_cond(xf[i], y[j]);
+			kmw = var_therm_cond(xf[i - 1], y[j]);
+			kmn = var_therm_cond(x[i], yf[j]);
+			kms = var_therm_cond(x[i], yf[j - 1]);
+			kmp = var_therm_cond(x[i], y[j]);
 
-			ae = ke*dy/dx;
-			aw = kw*dy/dx;
-			an = kn*dx/dy;
-			as = ks*dx/dy;
+			ae = kme*dy/dx;
+			aw = kmw*dy/dx;
+			an = kmn*dx/dy;
+			as = kms*dx/dy;
 			ap = ae + aw + an + as;
 
 
@@ -245,11 +237,11 @@ int main(int argc, char *argv[])
 	{
 		// south 
 		row = i;
-		B[row] = Tc;
+		B[row] = std::cos(x[i]);
 
 		// north 
 		row = (Ny + 1)*Nx2 + i;
-		B[row] = Tc;
+		B[row] = std::cos(x[i])*std::cos(Ly); 
 	
 	}
 
@@ -258,14 +250,13 @@ int main(int argc, char *argv[])
 	{
 		// west
 		row = Nx2*j;
-		B[row] = Tc;
+		B[row] = std::cos(y[j]);
 	
 		// east
 		row = Nx2*(j + 1) - 1; //don't forget the first row corner is meh
-		B[row] = Tc;
+		B[row] = std::cos(Lx)*std::cos(y[j]);
 		
 	}
-
 
 	// internal nodes
 	for (int i = 1; i <= Nx; i++)
@@ -273,10 +264,7 @@ int main(int argc, char *argv[])
 		for (int j = 1; j <= Ny; j++)
 		{
 			row = Nx2*j + i;
-			double r = find_r(x[i],y[j],Lx,Ly);
-			double source_term = source(r, a, b, R1);
-			
-			B[row] =dx*dy*source_term;
+			B[row] =dx*dy*2*std::cos(x[i])*std::cos(y[j])*(1 + std::sin(x[i])*std::sin(y[j]));
 		}
 	}
 	
@@ -328,7 +316,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Save the solution to file
-	std::ofstream cfile("Fuel_Rod/c_Fuel_Rod.dat");
+	std::ofstream cfile("With_K_m/c_with_km.dat");
 	for (int i = 0; i < Ntot; i++)
 	{
 		cfile << C[i] << "\n";

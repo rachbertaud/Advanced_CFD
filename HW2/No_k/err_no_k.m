@@ -1,31 +1,46 @@
-% 50 5.1118e-07
-% 100 5.0279e-07
-% 200 5.0069e-07
-% 500 9.9997e-07
-
-
-% ADding km 
-% 50 0.0020
-% 100 4.9312e-04
-% 200 1.2375e-04
-% 400 3.1494e-05
-
-%% BEFORE KM
-% N = [50 100 200 400];
-% Err_inf = [5.0149e-05 1.2997e-05 3.6082e-06 1.2758e-06];
-
-%% WITH KM
-
 addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 
 plot_settings(1);
 
+%%
 
-N = [50 100 200 400];
-Err_inf = [0.0020 4.9312e-04 1.2375e-04 3.1494e-05];
-% 100 4.9312e-04
-% 200 1.2375e-04
-% 400 3.1494e-05
+Err_inf = [];
+
+for N = [64 128 256 512]
+    x = readmatrix(sprintf('x_No_K_N%d.dat', N));
+    y = readmatrix(sprintf('y_No_K_N%d.dat', N));
+    c = readmatrix(sprintf('c_No_K_N%d.dat', N));
+
+    [X,Y] = meshgrid(x,y);
+
+    Nx = length(x);
+    Ny = length(y);
+
+    c_num = reshape(c, Ny, Nx);
+    
+    c_an = zeros(Ny, Nx);
+
+    for i = 2:1:Nx-1
+        for j = 2:1:Ny-1
+            row = (Nx)*(j - 1) + i;
+            c_an(j,i) = cos(x(i))*cos(y(j));
+        end
+    end 
+
+
+
+    c_num_NB = c_num(2:Ny - 1, 2:Nx - 1);
+    c_an_NB = c_an(2:Ny - 1, 2:Nx - 1);
+    X_NB = X(2:Ny - 1, 2:Nx - 1);
+    Y_NB = Y(2:Ny - 1, 2:Nx - 1);
+
+    err = max(max(abs(c_num_NB - c_an_NB)))/max(max(abs(c_an_NB)));
+    Err_inf = [Err_inf err];
+
+end
+
+N = [64 128 256 512];
+
 
 f = figure(1);
 theme(f,"light");
@@ -39,4 +54,4 @@ ylabel("Relative Error of Solution, $E_{\infty}$")
 xlabel("Number of Grid Points, $N$")
 hold off
 
-saveas(f, "HW2_Error_Plot_After_Km.png", 'png')
+saveas(f, "HW2_Error_Plot_No_K.png", 'png')
