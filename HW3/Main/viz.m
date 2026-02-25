@@ -4,7 +4,7 @@ addpath /Users/rachelbertaud/code/cmap-master;
 addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 
 plot_settings(1);
-cm = "viola";
+cm = "turbo";
 %%
 
 x = readmatrix("xc.dat");
