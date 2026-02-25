@@ -1,9 +1,9 @@
 #include <iostream> // needed for cout
-#include "Header_Case.h" // needed for the functions
-#include "Header_Mesh.h"
-#include "Header_Build.h"
-#include "Header_EigenSolve.h"
-#include "Header_Adv.h"
+#include "Header_Case.h" // needed for case functions/structs
+#include "Header_Mesh.h" // needed for mush functions/structs
+#include "Header_Build.h" //need for initalizing/building A and RHS
+#include "Header_EigenSolve.h" // needed for solver (EigenSolve)
+#include "Header_Adv.h" // needed for flux/phi stuff
 
 int main()
 {
