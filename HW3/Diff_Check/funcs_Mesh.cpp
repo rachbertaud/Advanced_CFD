@@ -100,7 +100,7 @@ void dispMesh(const meshType& Mesh){
 	std::cout << "---------------------------MESH INPUTS--------------------------" << std::endl;
 	std::cout << "Nx : " << Mesh.Nx << " (Number of cells in x)" << std::endl;
 	std::cout << "Ny : " << Mesh.Ny << " (Number of cells  in y)" << std::endl;
-	std::cout << "Lx : " << Mesh.Lx << " (Length of domain in x m) )" << std::endl;
+	std::cout << "Lx : " << Mesh.Lx << " (Length of domain in x m)" << std::endl;
 	std::cout << "Ly : " << Mesh.Ly << " (Length of domain in y m)" << std::endl;
 	std::cout << "----------------------------------------------------------------" << std::endl; 
 }

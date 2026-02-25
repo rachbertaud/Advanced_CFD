@@ -4,7 +4,7 @@ addpath /Users/rachelbertaud/code/cmap-master;
 addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 
 plot_settings(1);
-cm = "inferno";
+cm = "viola";
 %%
 
 x = readmatrix("xc.dat");
@@ -42,7 +42,7 @@ ax = gca;
 pcolor(ax, X_NB, Y_NB, c_num_NB)
 shading flat
 hold on
-contour(X_NB, Y_NB, Psi, 20, 'k')
+%contour(X_NB, Y_NB, Psi, 20, 'k')
 title("Numerical Solution")
 xlabel("x")
 ylabel("y")
