@@ -1,0 +1,22 @@
+Td
+300; // temperature of door, K
+w1
+3; // y position of bottom of west window, m
+w2
+4; // y position of top of west window, m
+n1
+3.5; // x position of left of north window, m
+n2
+4.5; // x position of right of north window, m
+s1
+1; // x position of left of southern door, m
+s2
+1.8; // x position of right of southern door, m
+Tx
+260; // Temperature of exterior, K
+h
+0.1; // heat transfer coefficent of window, W/(m^2 K)
+k
+0.026; // thermal conductivity of air ??
+
+
