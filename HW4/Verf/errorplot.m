@@ -49,9 +49,9 @@ plot(N, (Err_inf), 'Color',[227/255,159/255,246/255])
 plot(N, 1./N, '.-.', 'Color',[240/255,159/255,200/255])
 plot(N, 1./(N.^2), '--', 'Color',[220/255,200/255,246/255])
 set(gca,'YScale','log','XScale','log')
-legend('Results from HW3 Solution', '$\cal{O}$$(h)$ Reference Line', '$\cal{O}$$(h^2)$ Reference Line', 'Location','northeast')
+legend('Results from HW4 Solution', '$\cal{O}$$(h)$ Reference Line', '$\cal{O}$$(h^2)$ Reference Line', 'Location','northeast')
 ylabel("Relative Error of Solution, $E_{\infty}$")
 xlabel("Number of Grid Points, $N$")
 hold off
 
-saveas(f, "HW3_Error_Plot.png", 'png')
+saveas(f, "HW4_Error_Plot.png", 'png')
