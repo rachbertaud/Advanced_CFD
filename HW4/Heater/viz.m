@@ -30,9 +30,9 @@ avg = sum(sum(c_num_NB))/(Nx*Ny);
 w1 = 3; w2 = 4;      % west window y-range
 n1 = 3.5; n2 = 4.5;  % north window x-range
 s1 = 1;  s2 = 1.8;   % south door x-range
-x_west  = min(X_NB(:) - 0.025);
-y_south = min(Y_NB(:) - 0.05);
-y_north = max(Y_NB(:) + 0.05);
+x_west  = min(X_NB(:));
+y_south = min(Y_NB(:));
+y_north = max(Y_NB(:));
 
 f = figure(1);
 theme(f,"light");
@@ -41,13 +41,9 @@ pcolor(ax, X_NB, Y_NB, c_num_NB)
 shading flat
 hold on
 %contour(X_NB, Y_NB, Psi, 20, 'k')
-lw  = 8;       % line width
-mg  = 1;     % how far past the plot edge they extend
-
-plot([x_west x_west], [w1 w2],          '-', 'Color', [1.00 0.08 0.58], 'LineWidth', lw)  % west window
-plot([n1 n2],   [y_north y_north],       '-', 'Color', [1.00 0.08 0.58], 'LineWidth', lw)  % north window
-plot([s1 s2],   [y_south y_south],       '-', 'Color', [0.60 0.00 1.00], 'LineWidth', lw)  % south door
-
+plot([x_west  x_west],  [w1 w2],           '-', 'Color', [1.00 0.08 0.58], 'LineWidth', 3)  % west window  — Barbie pink
+plot([n1 n2],           [y_north y_north],  '-', 'Color', [1.00 0.08 0.58], 'LineWidth', 3)  % north window — Barbie pink
+plot([s1 s2],           [y_south y_south],  '-', 'Color', [0.60 0.00 1.00], 'LineWidth', 3)  % south door   — electric violet
 title("Numerical Solution")
 xlabel("x")
 ylabel("y")
@@ -59,4 +55,4 @@ subtitle(txt)
 colorbar
 colormap(cm)
 hold off
-saveas(f, "HW3_Stale_Numerical.png", 'png')
+% saveas(f, "HW3_C_Numerical.png", 'png')
