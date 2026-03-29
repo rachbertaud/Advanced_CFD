@@ -41,7 +41,7 @@ bcType::bcType(std::string filename)
 void bcType::W(double y, double t, double& a, double& b, double& g) const
 {
   // concentration is value of inlet at west wall (beg of membrane)
-  double Cin = 1.0;
+  double Cin = 0; //should be sin(y)*sin(x) here, but it's just 0
   a = 1;
   b = 0;
   g = Cin;
@@ -53,20 +53,20 @@ void bcType::E(double y, double t, double& a, double& b, double& g) const
   // concentration is zero on east wall (end of channel)
 	a = 0; //const
 	b = 1; // deriv
-	g = 0;
+	g = std::cos(6.28)*std::sin(y);
 }
 
 void bcType::S(double x, double t, double& a, double& b, double& g) const
 {
   a = -Vm;
-  b = k;
-  g = 0;
+  b = -k;
+  g = -Vm*std::sin(x)*std::sin(0) - k*std::sin(x)*std::cos(0);; //Vm*sin(y)*sin(x) at south is 0 bc y = 0 here
 }
 
 void bcType::N(double x, double t, double& a, double& b, double& g) const
 {
   a = Vm;
   b = -k;
-  g = 0; 
+  g = Vm*std::sin(x)*std::sin(6.28) - k*std::sin(x)*std::cos(6.28); 
 }
 

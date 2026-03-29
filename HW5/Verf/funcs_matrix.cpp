@@ -71,7 +71,7 @@ void matrixType::BuildA(
 		//north (Robin)
 		row = i + (Nx2*(Ny + 1));
 		double an,bn,gn;
-		C.BC.N(Mesh.Lx, 0.0, an, bn, gn);
+		C.BC.N(Mesh.xc[i], 0.0, an, bn, gn);
 		addEntry(row, row, 0.5*an + bn/dy);
 		addEntry(row, row - Nx2, 0.5*an - bn/dy);
 	}
@@ -248,6 +248,30 @@ void matrixType::BuildRHS(
 		C.BC.E(ye, 0.0, ae, be, ge);
 
 		setRHS((Nx + 1), j, ge);
+	}
+
+	// set internal nodes
+	for(int j = 1; j <= Ny; j++){
+		for(int i = 1; i <= Nx; i++){
+			
+			double diff = -2*k*std::sin(Mesh.xc[i])*std::sin(Mesh.yc[j]);
+
+			double x = Mesh.xc[i];
+			double y = Mesh.yc[j];
+			
+			double Tex = std::cos(x)*std::sin(y);
+			double Tey = std::sin(x)*std::cos(y);
+
+			double u = U.compU(x,y);
+			double v = U.compV(x,y);
+				
+			double adv = ((u*Tex) + (v*Tey));			
+			
+			double f = -diff + adv;
+
+			setRHS(i,j,dx*dy*f);
+
+		}
 	}
 
 }
