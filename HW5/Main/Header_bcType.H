@@ -1,6 +1,7 @@
 #ifndef HEADER_BCTYPE_H
 #define HEADER_BCTYPE_H
 
+#include <string>
 #include "Header_IO.H"
 
 struct bcType{
@@ -8,7 +9,8 @@ struct bcType{
   double Vm;
   double k;
 
-  bcType(std::string& filename);
+  bcType();
+  bcType(std::string filename);
   
   void read();
   void set();

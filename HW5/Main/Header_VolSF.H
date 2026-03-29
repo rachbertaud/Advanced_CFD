@@ -6,6 +6,7 @@
 #include <map>
 
 #include "Header_Mesh.H"
+#include "Header_bcType.H"
 
 
 struct volScalarField
@@ -20,7 +21,11 @@ struct volScalarField
   std::string filename;
   std::string savename;
 
+  bcType BC;
+
   // --------- constructors ---------- //
+  volScalarField();
+  volScalarField(std::string name);
   volScalarField(std::string name, meshType Mesh);
 
   

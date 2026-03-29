@@ -1,9 +1,12 @@
 #include <vector>
+#include <iostream>
 
 #include "Header_Mesh.H"
 #include "Header_ScaSF.H"
+#include "Header_velF.H"
+#include "Header_VolSF.H"
 
-void surfaceScalarField::allocate(const meshType& Mesh)
+surfaceScalarField::surfaceScalarField(const meshType& Mesh)
 {
 	Nx = Mesh.Nx;
 	Ny = Mesh.Ny;
@@ -35,11 +38,9 @@ double surfaceScalarField::getn(int i, int j) const
 
 void surfaceScalarField::ComputePhix(
 		 const meshType& Mesh,
-		 const caseType& Case)
-{
-	int Nx = Mesh.Nx;
-	int Ny = Mesh.Ny;
-	
+		 const volScalarField& C,
+	   const velocityField& U)
+{	
 	for (int i = 0; i <= Nx; i++)
 	{
 		for(int j = 0; j < Ny; j++)
@@ -47,25 +48,24 @@ void surfaceScalarField::ComputePhix(
 			double x = Mesh.xf[i];
 			double y = Mesh.yc[j+1];
 			
-			phix[ i + j*(Nx + 1)] = Case.cp*Case.rho*compU(x,y,Mesh,Case);		
+			phix[ i + j*(Nx + 1)] = U.compU(x,y);		
 		}
 	}
 }
 
 void surfaceScalarField::ComputePhiy( 
 		 const meshType& Mesh,
-		 const caseType& Case)
+		 const volScalarField& C,
+		 const velocityField& U)
 {
-	int Nx = Mesh.Nx;
-	int Ny = Mesh.Ny;
-	
 	for (int i = 0; i < Nx; i++)
 	{
 		for( int j = 0; j<= Ny; j++)
 		{
 			double x = Mesh.xc[i + 1];
-			double y = Mesh.yf[j];		
-			phiy[i + j*Nx] = Case.cp*Case.rho*compV(x,y,Mesh,Case); 
+			double y = Mesh.yf[j];
+			//std::cout << C.cp << "," << C.rho << "," << U.compV(x,y) << std::endl;
+			phiy[i + j*Nx] = U.compV(x,y); 
 
 		}
 	}

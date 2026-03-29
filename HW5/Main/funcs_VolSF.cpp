@@ -1,6 +1,7 @@
 #include "Header_VolSF.H"
 #include "Header_IO.H"
 #include "Header_Mesh.H"
+#include "Header_bcType.H"
 
 #include <iostream>
 #include <string> 	//needed for string
@@ -32,7 +33,7 @@ volScalarField::volScalarField(std::string name, meshType Mesh)
     Ny = Mesh.Ny;
     Ntot = (Nx + 2)*(Ny + 2);
     values.assign(Ntot, 0.0);
-    
+    BC = bcType(filename);
   };
 
 

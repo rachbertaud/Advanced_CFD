@@ -8,6 +8,10 @@
 
 //---------------------------MESH FUNCTIONS----------------------------------------------
 
+bcType::bcType()
+{
+  double hi = 1;
+}
 void bcType::disp() const
 {
   std::cout << "------------ BC DATA --------------" << std::endl;
@@ -16,7 +20,7 @@ void bcType::disp() const
 
 }
 
-bcType::bcType(std::string& filename)
+bcType::bcType(std::string filename)
 {
   std::map<std::string, double> var;
   std::string fileone = "Vel.inp";
@@ -26,6 +30,8 @@ bcType::bcType(std::string& filename)
 
   Vm = var["Vm"];
   k = var["k"];
+
+  disp();
   
   
   
@@ -36,8 +42,8 @@ void bcType::W(double y, double t, double& a, double& b, double& g) const
 {
   // concentration is value of inlet at west wall (beg of membrane)
   double Cin = 1.0;
-  a = 0;
-  b = 1;
+  a = 1;
+  b = 0;
   g = Cin;
    
 }
@@ -45,15 +51,15 @@ void bcType::W(double y, double t, double& a, double& b, double& g) const
 void bcType::E(double y, double t, double& a, double& b, double& g) const
 {
   // concentration is zero on east wall (end of channel)
-	a = 1; //const
-	b = 0; // deriv
+	a = 0; //const
+	b = 1; // deriv
 	g = 0;
 }
 
 void bcType::S(double x, double t, double& a, double& b, double& g) const
 {
   a = -Vm;
-  b = -k;
+  b = k;
   g = 0;
 }
 
