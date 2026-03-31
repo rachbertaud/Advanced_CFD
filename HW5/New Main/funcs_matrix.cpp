@@ -250,29 +250,6 @@ void matrixType::BuildRHS(
 		setRHS((Nx + 1), j, ge);
 	}
 
-	// set internal nodes
-	for(int j = 1; j <= Ny; j++){
-		for(int i = 1; i <= Nx; i++){
-			
-			double diff = -2*k*std::sin(Mesh.xc[i])*std::sin(Mesh.yc[j]);
-
-			double x = Mesh.xc[i];
-			double y = Mesh.yc[j];
-			
-			double Tex = std::cos(x)*std::sin(y);
-			double Tey = std::sin(x)*std::cos(y);
-
-			double u = U.compU(x,y);
-			double v = U.compV(x,y);
-				
-			double adv = ((u*Tex) + (v*Tey));			
-			
-			double f = -diff + adv;
-
-			setRHS(i,j,dx*dy*f);
-
-		}
-	}
 
 }
 

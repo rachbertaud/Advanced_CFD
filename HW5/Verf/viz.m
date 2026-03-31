@@ -5,9 +5,13 @@ addpath /Users/rachelbertaud/code/MATLAB_Settings/;
 plot_settings(1);
 cm = "turbo";
 %%
-x = readmatrix("xc_N256.dat");
-y = readmatrix("yc_N256.dat");
-c = readmatrix("c_N256.dat");
+% x = readmatrix("xc_N256.dat");
+% y = readmatrix("yc_N256.dat");
+% c = readmatrix("c_N256.dat");
+
+x = readmatrix("xc.dat");
+y = readmatrix("yc.dat");
+c = readmatrix("c.dat");
 
 [X,Y] = meshgrid(x,y);
 Nx = length(x);
