@@ -51,8 +51,9 @@ xlabel("$$x$$")
 ylabel("$$y$$")
 xlabel("$$C(x,y)$$")
 colorbar
+clim([min(c_num(:)), max(c_num(:))])
 shading flat
-name = "HW5_NeumannBC_Nx" + num2str(Nx) + "_Ny_" + num2str(Ny) + ".png";
+name = "HW5_ExtrapBC_Nx" + num2str(Nx) + "_Ny_" + num2str(Ny) + ".png";
 saveas(f, name, 'png')
 
 f = figure(2);
@@ -62,5 +63,5 @@ hold on
 ylabel("$$C(x,0)$$")
 xlabel("$$x$$")
 % plot(x, c_num(1,:), 'm')
-name = "HW5_NeumannBC_Nx" + num2str(Nx) + "_Ny_" + num2str(Ny) + "_Edge.png";
+name = "HW5_ExtrapBC_Nx" + num2str(Nx) + "_Ny_" + num2str(Ny) + "_Edge.png";
 saveas(f, name, 'png')

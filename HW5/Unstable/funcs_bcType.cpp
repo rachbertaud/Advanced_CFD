@@ -73,7 +73,7 @@ void bcType::S(double x, double t, double& a, double& b, double& g) const
 void bcType::N(double x, double t, double& a, double& b, double& g) const
 {
   a = Vm;
-  b = -k;
+  b = k;
   g = 0;
 }
 

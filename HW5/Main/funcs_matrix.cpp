@@ -88,10 +88,13 @@ void matrixType::BuildA(
 
 		//east
 		row = Nx2*(j + 1) - 1;
-		double ae,be,ge;
-		C.BC.E(Mesh.Ly, 0.0, ae, be, ge);
-		addEntry(row, row, ae*0.5 + be/dx);
-		addEntry(row, row - 1,ae*0.5 - be/dx);
+		double x = Mesh.xc[Nx + 1];
+		double x1 = Mesh.xc[Nx];
+		double x2 = Mesh.xc[Nx - 1];
+		double frac = (x - x1)/(x2 - x1);
+		addEntry(row, row, 1); //ye, x is in pos row
+		addEntry(row, row - 1, -(1 - frac)); //y1, x1 is in pos row - 1
+		addEntry(row, row - 2, -frac); // y2, 
 	}
 
 	//five-point stencil
@@ -247,7 +250,7 @@ void matrixType::BuildRHS(
 		double ge = 0;
 		C.BC.E(ye, 0.0, ae, be, ge);
 
-		setRHS((Nx + 1), j, ge);
+		setRHS((Nx + 1), j, 0);
 	}
 
 
