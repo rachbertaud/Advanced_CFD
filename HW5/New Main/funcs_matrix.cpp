@@ -65,8 +65,8 @@ void matrixType::BuildA(
 		row = i;
 		double as,bs,gs;
 		C.BC.S(Mesh.xc[i], 0.0, as, bs, gs);
-		addEntry(row, row , 0.5*as - bs/dy);
-		addEntry(row, row + Nx2, 0.5*as + bs/dy); 
+		addEntry(row, row , 0.5*as + bs/dy);
+		addEntry(row, row + Nx2, 0.5*as - bs/dy); 
 
 		//north (Robin)
 		row = i + (Nx2*(Ny + 1));

@@ -5,12 +5,12 @@
 #include <iostream> 	//needed for cout
 
 #include "Header_bcType.H"
+#include "Header_Mesh.H"
 
 //---------------------------MESH FUNCTIONS----------------------------------------------
 
 bcType::bcType()
 {
-  double hi = 1;
 }
 void bcType::disp() const
 {
@@ -24,12 +24,17 @@ bcType::bcType(std::string filename)
 {
   std::map<std::string, double> var;
   std::string fileone = "Vel.inp";
+
+  //std::map<std::string, double> meshname;
+  //std::string mesh = "Mesh.inp";
   
   reader(fileone, var);
   reader(filename, var);
+  //reader(mesh, var);
 
   Vm = var["Vm"];
   k = var["k"];
+  
 
   disp();
   
@@ -51,15 +56,17 @@ void bcType::W(double y, double t, double& a, double& b, double& g) const
 void bcType::E(double y, double t, double& a, double& b, double& g) const
 {
   // concentration is zero on east wall (end of channel)
-	a = 0; //const
-	b = 1; // deriv
-	g = 0;
+	a = 1; //const
+	b = 0; // deriv
+	
+//	double out = (y1 + ((x - x1)*((y2 - y1)/(x2 - x1))))
+	g = 1.2;
 }
 
 void bcType::S(double x, double t, double& a, double& b, double& g) const
 {
   a = -Vm;
-  b = -k;
+  b = k;
   g = 0;
 }
 
