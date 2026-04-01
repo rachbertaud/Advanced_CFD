@@ -3,14 +3,11 @@
 
 #include <string>
 #include "Header_IO.H"
-#include "Header_Mesh.H"
 
 struct bcType{
 
   double Vm;
   double k;
-  double dy;
-  double dx;
 
   bcType();
   bcType(std::string filename);

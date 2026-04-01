@@ -71,7 +71,7 @@ void matrixType::BuildA(
 		//north (Robin)
 		row = i + (Nx2*(Ny + 1));
 		double an,bn,gn;
-		C.BC.N(Mesh.xc[i], 0.0, an, bn, gn);
+		C.BC.N(Mesh.Lx, 0.0, an, bn, gn);
 		addEntry(row, row, 0.5*an + bn/dy);
 		addEntry(row, row - Nx2, 0.5*an - bn/dy);
 	}
@@ -249,7 +249,6 @@ void matrixType::BuildRHS(
 
 		setRHS((Nx + 1), j, ge);
 	}
-
 
 }
 

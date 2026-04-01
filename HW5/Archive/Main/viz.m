@@ -1,0 +1,26 @@
+
+clear
+addpath /Users/rachelbertaud/code/cmap-master;
+addpath /Users/rachelbertaud/code/MATLAB_Settings/;
+plot_settings(1);
+cm = "turbo";
+%%
+x = readmatrix("xc.dat");
+y = readmatrix("yc.dat");
+c = readmatrix("c.dat");
+
+[X,Y] = meshgrid(x,y);
+Nx = length(x);
+Ny = length(y);
+c_num = reshape(c, Ny, Nx);
+%%
+c_num_NB = c_num(2:Ny - 1, 2:Nx - 1)';
+X_NB = X(2:Ny - 1, 2:Nx - 1);
+Y_NB = Y(2:Ny - 1, 2:Nx - 1);
+
+
+f = figure(1);
+theme(f,"light");
+ax = gca;
+surf(ax, X_NB, Y_NB, c_num_NB)
+shading flat

@@ -4,8 +4,6 @@ build:
 run:
 	./main
 
-ErrorData:
-	./Error_Submit.sh
 clean: 
 	rm -f main
 	rm -f xc*

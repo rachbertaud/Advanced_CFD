@@ -56,11 +56,11 @@ void bcType::W(double y, double t, double& a, double& b, double& g) const
 void bcType::E(double y, double t, double& a, double& b, double& g) const
 {
   // concentration is zero on east wall (end of channel)
-	a = 1; //const
-	b = 0; // deriv
+	a = 0; //const
+	b = 1; // deriv
 	
 //	double out = (y1 + ((x - x1)*((y2 - y1)/(x2 - x1))))
-	g = 1.2;
+	g = 0;
 }
 
 void bcType::S(double x, double t, double& a, double& b, double& g) const
