@@ -1,9 +1,9 @@
 
 clear
-addpath /Users/rachelbertaud/code/cmap-master;
-addpath /Users/rachelbertaud/code/MATLAB_Settings/;
-plot_settings(1);
-cm = "internet";
+% addpath /Users/rachelbertaud/code/cmap-master;
+% addpath /Users/rachelbertaud/code/MATLAB_Settings/;
+% plot_settings(1);
+% cm = "internet";
 %%
 x = readmatrix("xc.dat");
 y = readmatrix("yc.dat");
@@ -46,7 +46,7 @@ c_num(Ny,Nx) = y_e(x(Nx), x(Nx-1), c_num(Ny,Nx-1), x(Nx - 2), c_num(Ny,Nx - 2));
 f = figure(1);
 theme(f,"light");
 surf(X, Y, c_num)
-colormap(cm)
+% colormap(cm)
 xlabel("$$x$$")
 ylabel("$$y$$")
 xlabel("$$C(x,y)$$")
