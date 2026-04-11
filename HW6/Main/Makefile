@@ -11,4 +11,5 @@ clean:
 	rm -f xc*
 	rm -f yc*
 	rm -f c*
+	rm -f T_*
 

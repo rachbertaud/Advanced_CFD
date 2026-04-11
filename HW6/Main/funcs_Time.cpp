@@ -4,7 +4,7 @@
 
 Time::Time()
 {
-  std::string filename = "controlDict.inp";
+  std::string filename = "ControlDict.inp";
   reader(filename, var);
   set();
   disp();

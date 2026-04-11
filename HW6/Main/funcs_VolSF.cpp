@@ -65,7 +65,7 @@ void volScalarField::Save(const Time& runTime) const
     file.open("T_" + tName);
     for (int i = 0; i < Ntot; i++)
     {
-        file << values[i] << "\n";
+        file << t0.values[i] << "\n";
     }
 
     file.close();

@@ -40,6 +40,8 @@ int main()
       T.compTmax(runTime);
       T.Save(runTime);
     }
+
+    T.update();
   }
   
 

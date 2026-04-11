@@ -1,8 +1,8 @@
+writeInterval
+25;
 startTime
 0;
 dt
-0.001;
+0.05;
 Nt
-1000;
-writeInterval
-25;
+100;

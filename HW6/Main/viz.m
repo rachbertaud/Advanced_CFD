@@ -7,7 +7,7 @@ clear
 %%
 x = readmatrix("xc.dat");
 y = readmatrix("yc.dat");
-c_num = readmatrix("c.dat");
+c_num = readmatrix("T_4550000");
 
 [X,Y] = meshgrid(x,y);
 dx = abs(X(1,1) - X(1,2));
