@@ -7,7 +7,7 @@ clear
 %%
 x = readmatrix("xc.dat");
 y = readmatrix("yc.dat");
-c_num = readmatrix("T_25");
+c_num = readmatrix("T_1800");
 
 [X,Y] = meshgrid(x,y);
 dx = abs(X(1,1) - X(1,2));
@@ -56,8 +56,7 @@ zlabel("$$C(x,y)$$")
 colorbar
 clim([min(c_num_NB(:)), max(c_num_NB(:))])
 shading flat
-name = "HW5_ExtrapBC_Nx" + num2str(Nx) + "_Ny_" + num2str(Ny) + ".png";
-saveas(f, name, 'png')
+
 
 f = figure(2);
 theme(f, "light")
@@ -66,5 +65,4 @@ hold on
 ylabel("$$C(x,0)$$")
 xlabel("$$x$$")
 % plot(x, c_num(1,:), 'm')
-name = "HW5_ExtrapBC_Nx" + num2str(Nx) + "_Ny_" + num2str(Ny) + "_Edge.png";
-saveas(f, name, 'png')
+

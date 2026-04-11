@@ -16,7 +16,7 @@ int main()
   meshType Mesh;
   
   volScalarField T("T", Mesh, runTime);
-  T.setUniformIC(0, 0, Mesh);
+  T.setUniformIC(0, 1, Mesh);
   SpatError errorComp(T);
 
 

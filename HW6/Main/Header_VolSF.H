@@ -16,7 +16,7 @@ struct volScalarField
   int Nx, Ny;
   int Ntot;
   std::vector<double> values;
-  double rho, cp, k, omega, time;
+  double rho, cp, k, omega, time, Tmax;
   //std::string name;
   std::map<std::string, double> VolVar;
 
@@ -36,7 +36,7 @@ struct volScalarField
   double get(int i, int j) const;
   void set(int i, int j, double val);
   void Save(const Time& runTime) const;
-  void setUniformIC(double val);
+  void setUniformIC(double val, int flag, const meshType& Mesh);
 
   fieldVal t00;
   fieldVal t0;

@@ -95,7 +95,7 @@ void matrixType::BuildA(
 		double ae,be,ge;
 		C.BC.E(Mesh.yc[j], t, ae, be, ge);
 		addEntry(row, row, 0.5*ae + be/dx);
-		addEntry(row, row + 1, 0.5*ae - be/dx);
+		addEntry(row, row - 1, 0.5*ae - be/dx);
 
 		
 
@@ -126,6 +126,7 @@ void matrixType::BuildA(
 	double cp = C.cp;
 	double rho = C.rho;
 	double dt = runTime.dt;
+	std::cout << dt << std::endl;
 
 	//internal nodes of A
 	//
@@ -186,29 +187,6 @@ void matrixType::BuildA(
 	//top right 
 	addEntry((Nx2*Ny2 - 1), (Nx2*Ny2 - 1), 1);
 
-		// Save the solution ot file
-	//std::ofstream rowfile("row.dat");
-	//double Ntot = Nx2*Ny2;
-	//for (int i = 0; i < ROW.size(); i++)
-	//{
-	//	rowfile << ROW[i] << "\n";
-	//}
-	//rowfile.close();
- 	// Save the solution ot file
-	//std::ofstream colfile("col.dat");
-	//for (int i = 0; i < COL.size(); i++)
-	//{
-	//	colfile << COL[i] << "\n";
-	//}
-	//colfile.close();
-	// Save the solution ot file
-	//std::ofstream valfile("val.dat");
-	//for (int i = 0; i < VAL.size(); i++)
-	//{
-	//	valfile << VAL[i] << "\n";
-	//}
-	//valfile.close();
-
 }
 
 void matrixType::BuildRHS( 
@@ -226,7 +204,7 @@ void matrixType::BuildRHS(
 	double rho = C.rho;
 	double cp = C.cp;
 	double dt = runTime.dt;
-	double currentTime = runTime.time;
+	double currentTime = runTime.time - dt;
 	
 
 	// south/north BC (Dirichlet)
@@ -349,14 +327,4 @@ void matrixType::solve(volScalarField& C)
 
 	
 	
-
-
-	// // Save the solution ot file
-	// std::ofstream cfile("c.dat");
-	// //cfile << std::scientific << std::setprecision(16);
-	// for (int i = 0; i < Ntot; i++)
-	// {
-	// 	cfile << C[i] << "\n";
-	// }
-	// cfile.close();
 

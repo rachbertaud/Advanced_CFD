@@ -30,6 +30,7 @@ volScalarField::volScalarField(std::string name, meshType Mesh, const Time& runT
     std::string om = "omega";
     omega = retriever(om, VolVar);
     time = runTime.time;
+    Tmax = 0;
 
     disp(name);
 
@@ -72,16 +73,35 @@ void volScalarField::Save(const Time& runTime) const
 }
 
   
-void volScalarField::setUniformIC(double val)
+void volScalarField::setUniformIC(double val, int flag,
+                                  const meshType& Mesh)
 {
-  for(int i = 0; i < (Nx + 2); i++)
+  if( flag == 0 )
   {
-    for(int j = 0; j < (Ny + 2); j++)
+    for(int i = 0; i < (Nx + 2); i++)
     {
-      t0.set(i, j, val);
+      for(int j = 0; j < (Ny + 2); j++)
+      {
+        t0.set(i, j, val);
+      }
     }
   }
+  else
+  {
+    for(int i = 0; i < (Nx + 2); i++)
+    {
+    for(int j = 0; j < (Ny + 2); j++)
+      {
+        double x = Mesh.xc[i];
+        double y = Mesh.yc[j];
+        val = std::cos(x)*std::cos(y);
+        t0.set(i, j, val);
+      }
+    }
+  }
+
 }
+
 
 void volScalarField::setSource(const meshType& Mesh,
                                const Time& runTime)
@@ -109,7 +129,7 @@ void volScalarField::setSource(const meshType& Mesh,
 
 void volScalarField::compTmax(const Time& runTime)
 {
-  double Tmax = 0;
+  Tmax = 0;
   for(int i = 0; i < Ntot; i ++){
     double diff = std::fabs(t1.values[i] - t0.values[i]);
     if( diff > Tmax)
