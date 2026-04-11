@@ -57,6 +57,7 @@ void matrixType::BuildA(
 	double dx = Mesh.dx;
 	double dy = Mesh.dy;
 	double k = C.k;
+	double t = runTime.time;
 	//std::cout << "Here!" << std::endl;
 
 	int row;
@@ -67,14 +68,14 @@ void matrixType::BuildA(
 		// south (Robin)
 		row = i;
 		double as,bs,gs;
-		C.BC.S(Mesh.xc[i], 0.0, as, bs, gs);
+		C.BC.S(Mesh.xc[i], t, as, bs, gs);
 		addEntry(row, row , 0.5*as + bs/dy);
 		addEntry(row, row + Nx2, 0.5*as - bs/dy); 
 
 		//north (Robin)
 		row = i + (Nx2*(Ny + 1));
 		double an,bn,gn;
-		C.BC.N(Mesh.xc[i], 0.0, an, bn, gn);
+		C.BC.N(Mesh.xc[i], t, an, bn, gn);
 		addEntry(row, row, 0.5*an + bn/dy);
 		addEntry(row, row - Nx2, 0.5*an - bn/dy);
 	}
@@ -85,19 +86,27 @@ void matrixType::BuildA(
 		//west 
 		row = Nx2*j;
 		double aw,bw,gw;
-		C.BC.W(Mesh.yc[j], 0.0, aw, bw, gw);
+		C.BC.W(Mesh.yc[j], t, aw, bw, gw);
 		addEntry(row, row, 0.5*aw + bw/dx);
 		addEntry(row, row + 1, 0.5*aw - bw/dx);
 
 		//east
 		row = Nx2*(j + 1) - 1;
-		double x = Mesh.xc[Nx + 1];
-		double x1 = Mesh.xc[Nx];
-		double x2 = Mesh.xc[Nx - 1];
-		double frac = (x - x1)/(x2 - x1);
-		addEntry(row, row, 1); //ye, x is in pos row
-		addEntry(row, row - 1, -(1 - frac)); //y1, x1 is in pos row - 1
-		addEntry(row, row - 2, -frac); // y2, 
+		double ae,be,ge;
+		C.BC.E(Mesh.yc[j], t, ae, be, ge);
+		addEntry(row, row, 0.5*ae + be/dx);
+		addEntry(row, row + 1, 0.5*ae - be/dx);
+
+		
+
+		//extrapolation code from last time
+		// double x = Mesh.xc[Nx + 1];
+		// double x1 = Mesh.xc[Nx];
+		// double x2 = Mesh.xc[Nx - 1];
+		// double frac = (x - x1)/(x2 - x1);
+		// addEntry(row, row, 1); //ye, x is in pos row
+		// addEntry(row, row - 1, -(1 - frac)); //y1, x1 is in pos row - 1
+		// addEntry(row, row - 2, -frac); // y2, 
 	}
 
 	//five-point stencil

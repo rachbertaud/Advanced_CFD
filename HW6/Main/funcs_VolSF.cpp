@@ -59,7 +59,7 @@ void volScalarField::set(int i, int j, double val)
 
 void volScalarField::Save(const Time& runTime) const
 {
-    double time = runTime.time;
+    int time = static_cast<int>(runTime.timeStep);
     std::string tName = std::to_string(time);
     std::ofstream file;
     file.open("T_" + tName);
