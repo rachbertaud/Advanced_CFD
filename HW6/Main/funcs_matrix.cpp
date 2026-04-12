@@ -204,7 +204,7 @@ void matrixType::BuildRHS(
 	double rho = C.rho;
 	double cp = C.cp;
 	double dt = runTime.dt;
-	double currentTime = runTime.time - dt;
+	double currentTime = runTime.time;
 	
 
 	// south/north BC (Dirichlet)
