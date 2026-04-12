@@ -1,5 +1,5 @@
 writeInterval
-1000000;
+10;
 startTime
 0;
 dt

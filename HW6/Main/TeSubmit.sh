@@ -1,6 +1,10 @@
 #!/bin/bash
 echo 'dt, error' > t_convergence.csv
 
+#sed -i '' "8s/.*/dt/" T.inp
+sed -i '' "8s/.*/6.28/" T.inp	    
+
+
 sed -i '' "2s/^[0-9]*/32/" Mesh.inp  # Nx on line 2
 sed -i '' "4s/^[0-9]*/32/" Mesh.inp  # Nx on line 2
 

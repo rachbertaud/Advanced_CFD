@@ -27,7 +27,8 @@ ax2.loglog(df2["dt"], df2["error"], 'o-', color='hotpink', label="error")
 
 dt = df2["dt"].values
 ax2.loglog(dt, dt/dt[0] * df2["error"].values[0], '--', color='plum', label="O(dt)")
-ax2.loglog(dt, (dt/dt[0])**2 * df2["error"].values[0], '--', color='orchid', label="O(dt²)")ax2.set_xlabel("dt")
+ax2.loglog(dt, (dt/dt[0])**2 * df2["error"].values[0], '--', color='orchid', label="O(dt²)")
+ax2.set_xlabel("dt")
 
 ax2.set_ylabel("Error")
 ax2.set_title("Temporal Convergence")

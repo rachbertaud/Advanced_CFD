@@ -7,10 +7,14 @@ build:
 run:
 	./SeSubmit.sh
 	./TeSubmit.sh
+	python3 plot.py
 clean: 
 	rm -f main
+	rm -f main_SE
+	rm -f main_TE
 	rm -f xc*
 	rm -f yc*
-	rm -f c*
+	#rm -f c*
 	rm -f T_*
-	
+	rm -f *.csv
+	rm -f *.png
