@@ -1,0 +1,8 @@
+writeInterval
+10;
+startTime
+0;
+dt
+0.0005
+Nt
+10000;
