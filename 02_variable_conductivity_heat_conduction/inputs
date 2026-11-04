@@ -11,7 +11,7 @@ R1
 R2
 0.005;
 k1
-2.0; diffusivity value?
+2.0; fuel thermal conductivity
 k2
 15.0;
 k3

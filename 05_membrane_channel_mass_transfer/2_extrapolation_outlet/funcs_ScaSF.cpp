@@ -64,7 +64,6 @@ void surfaceScalarField::ComputePhiy(
 		{
 			double x = Mesh.xc[i + 1];
 			double y = Mesh.yf[j];
-			//std::cout << C.cp << "," << C.rho << "," << U.compV(x,y) << std::endl;
 			phiy[i + j*Nx] = U.compV(x,y); 
 
 		}

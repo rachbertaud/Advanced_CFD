@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 		xf[i] = dx*i;
 	}
 	
-	// computing cell centered loations
+	// computing cell centered locations
 	for(int i = 0; i <= (Nx + 1); i++)
 	{
 		x[i] = -dx*0.5 + dx*i;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
                 yf[i] = dy*i;
         }
 
-        // computing cell centered loations
+        // computing cell centered locations
         for(int i = 0; i <= (Ny + 1); i++)
         {
                 y[i] = -dy*0.5 + dy*i;

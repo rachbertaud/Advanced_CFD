@@ -1,6 +1,6 @@
 #include "Header_Case.h" // needed for case functions/structs
-#include "Header_Mesh.h" // needed for mush functions/structs
-#include "Header_matrix.h" //need for initalizing/building A and RHS
+#include "Header_Mesh.h" // needed for mesh functions/structs
+#include "Header_matrix.h" //need for initializing/building A and RHS
 #include "Header_EigenSolve.h" // needed for solver (EigenSolve)
 #include "Header_ScaSF.h" // needed for flux/phi stuff
 #include "Header_Robin.h" // needed for BC 
@@ -14,13 +14,9 @@ int main()
 
 	meshType Mesh; 
 	Mesh.read();
-	//std::cout << "here" << std::endl;
 	Mesh.disp();
-	//std::cout << "here" << std::endl;
 	Mesh.create();
-	//std::cout << "here" << std::endl;
 	Mesh.write();
-	//std::cout << "here" << std::endl;
 
 
 	matrixType A;

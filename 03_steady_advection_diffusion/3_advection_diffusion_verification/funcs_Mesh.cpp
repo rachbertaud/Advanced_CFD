@@ -76,7 +76,7 @@ void createMesh(meshType& Mesh){
 		Mesh.xf[i] = dx*i;
 	}
 	
-	// computing cell centered loations
+	// computing cell centered locations
 	for(int i = 0; i <= (Nx + 1); i++)
 	{
 		Mesh.xc[i] = -dx*0.5 + dx*i;
@@ -88,7 +88,7 @@ void createMesh(meshType& Mesh){
                 Mesh.yf[i] = dy*i;
         }
 
-        // computing cell centered loations
+        // computing cell centered locations
         for(int i = 0; i <= (Ny + 1); i++)
         {
                 Mesh.yc[i] = -dy*0.5 + dy*i;

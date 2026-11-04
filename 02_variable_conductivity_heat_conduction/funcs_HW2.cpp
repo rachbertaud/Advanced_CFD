@@ -64,7 +64,6 @@ double find_r(double x, double y, double Lx, double Ly){
 	double y_diff = std::pow((y - (Ly/2)),2);
 
         r = std::sqrt(x_diff + y_diff);	
-	//std::cout << "r = " << r << "(x, y) : " << x << ", " << y << std::endl;	
 	return r;
 }
 

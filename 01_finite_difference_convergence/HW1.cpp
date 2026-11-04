@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 
 		//define h as N/L
 		double h = L/static_cast<double>(N);
-		//cout << "Checking L/N = " << L << "/" << N << " = " << h << " = h" << endl;
 
 //------------------------------- Question 2 ----------------------------------------
 
@@ -55,7 +54,7 @@ int main(int argc, char *argv[])
 		for(int i=0; i < N; i++){
 			x[i] = i*h; //declares the grid point by using h
 			f[i] = exp(sin(C*x[i])); //declares function we wish to evaluate the derivative of
-			f_analytical[i] = C*cos(C*x[i])*exp(sin(C*x[i])); //declares teh analytical solution to f
+			f_analytical[i] = C*cos(C*x[i])*exp(sin(C*x[i])); //declares the analytical solution to f
 		}
 
 //------------------------------- Question 3 ----------------------------------------

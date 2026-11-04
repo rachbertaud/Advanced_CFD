@@ -41,9 +41,9 @@ pcolor(ax, X_NB, Y_NB, c_num_NB)
 shading flat
 hold on
 %contour(X_NB, Y_NB, Psi, 20, 'k')
-plot([x_west  x_west],  [w1 w2],           '-', 'Color', [1.00 0.08 0.58], 'LineWidth', 3)  % west window  — Barbie pink
-plot([n1 n2],           [y_north y_north],  '-', 'Color', [1.00 0.08 0.58], 'LineWidth', 3)  % north window — Barbie pink
-plot([s1 s2],           [y_south y_south],  '-', 'Color', [0.60 0.00 1.00], 'LineWidth', 3)  % south door   — electric violet
+plot([x_west  x_west],  [w1 w2],           '-', 'Color', [1.00 0.08 0.58], 'LineWidth', 3)  % west window
+plot([n1 n2],           [y_north y_north],  '-', 'Color', [1.00 0.08 0.58], 'LineWidth', 3)  % north window
+plot([s1 s2],           [y_south y_south],  '-', 'Color', [0.60 0.00 1.00], 'LineWidth', 3)  % south door
 title("Numerical Solution")
 xlabel("x")
 ylabel("y")

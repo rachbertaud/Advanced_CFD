@@ -62,7 +62,7 @@ void BC::disp() const{
     std::cout << "h  : " << h  << " (Heat Transfer coefficient of windows)" << std::endl;
     std::cout << "Tx : " << Tx << " (Temperature External)" << std::endl;
     std::cout << "Td : " << Td << " (Temperature of Door)" << std::endl;
-    std::cout << "Ts : " << Ts << " Some unit thing for the heater" << std::endl;
+    std::cout << "Ts : " << Ts << " (Heater source strength)" << std::endl;
     std::cout << "h1 : " << h1 << " | h2 : " << h2 << " (Heater coordinates)" << std::endl;
     std::cout << "n1 : " << n1 << " | n2 : " << n2 << " (Window coordinates - North)" << std::endl;
     std::cout << "w1 : " << w1 << " | w2 : " << w2 << " (Window coordinates - West)" << std::endl;

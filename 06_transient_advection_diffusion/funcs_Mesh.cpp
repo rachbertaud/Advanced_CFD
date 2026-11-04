@@ -40,7 +40,7 @@ void meshType::set()
 		xf[i] = dx*i;
 	}
 	
-	// computing cell centered loations
+	// computing cell centered locations
 	for(int i = 0; i <= (Nx + 1); i++)
 	{
 		xc[i] = -dx*0.5 + dx*i;
@@ -52,7 +52,7 @@ void meshType::set()
           yf[i] = dy*i;
   }
 
-  // computing cell centered loations
+  // computing cell centered locations
   for(int i = 0; i <= (Ny + 1); i++)
   {
           yc[i] = -dy*0.5 + dy*i;

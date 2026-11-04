@@ -15,8 +15,8 @@ s2
 Tx
 260; // Temperature of exterior, K
 h
-1.0; // heat transfer coefficent of window, W/(m^2 K)
+1.0; // heat transfer coefficient of window, W/(m^2 K)
 k
-1.0; // thermal conductivity of air ??
+1.0; // thermal conductivity of air
 
 

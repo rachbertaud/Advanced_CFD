@@ -55,7 +55,6 @@ void matrixType::BuildA(
 	double dx = Mesh.dx;
 	double dy = Mesh.dy;
 	double k = C.k;
-	//std::cout << "Here!" << std::endl;
 
 	int row;
 
@@ -132,15 +131,10 @@ void matrixType::BuildA(
 			double Ap = Fe*(1 - Se)*dy - Fw*Sw*dy + Fn*(1 - Sn)*dx - Fs*Ss*dx;
 
 			double ae = De + Ae;
-			//std::cout << "ae: " << ae << std::endl;
 			double aw = Dw + Aw;
-			//std::cout << "aw: " << aw << std::endl;
 			double as = Ds + As;
-			//std::cout << "as: " << as << std::endl;
 			double an = Dn + An;
-			//std::cout << "an: " << an << std::endl;
 			double ap = Dp + Ap;
-			//std::cout << "ap: " << ap << std::endl;
 
 			row = Nx2*j + i;
 	
@@ -152,7 +146,6 @@ void matrixType::BuildA(
 			//count += 1;
 		}
 	}
-	//std::cout << "count: " << count << std::endl;
 
 	// extraneous nodes
 

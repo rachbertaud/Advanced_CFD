@@ -58,7 +58,6 @@ void matrixType::BuildA(
 	double dy = Mesh.dy;
 	double k = C.k;
 	double t = runTime.time;
-	//std::cout << "Here!" << std::endl;
 
 	int row;
 
@@ -151,15 +150,10 @@ void matrixType::BuildA(
 			double T = rho*cp*dx*dy/dt;
 
 			double ae = De + Ae;
-			//std::cout << "ae: " << ae << std::endl;
 			double aw = Dw + Aw;
-			//std::cout << "aw: " << aw << std::endl;
 			double as = Ds + As;
-			//std::cout << "as: " << as << std::endl;
 			double an = Dn + An;
-			//std::cout << "an: " << an << std::endl;
 			double ap = Dp + Ap + T; //T accounts for the unsteady term!
-			//std::cout << "ap: " << ap << std::endl;
 
 			row = Nx2*j + i;
 	
@@ -171,7 +165,6 @@ void matrixType::BuildA(
 			//count += 1;
 		}
 	}
-	//std::cout << "count: " << count << std::endl;
 
 	// extraneous nodes
 

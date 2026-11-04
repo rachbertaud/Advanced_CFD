@@ -23,7 +23,6 @@ double velocityField::compV(double x, double y) const
 velocityField::velocityField(meshType& Mesh)
 {
   h = 0.5*Mesh.Ly;
-  //std::cout << h << std::endl;
   std::string filename = "Vel.inp";
   reader(filename, VelVar);
   set();
