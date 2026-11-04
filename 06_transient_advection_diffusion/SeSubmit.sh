@@ -1,25 +1,22 @@
 #!/bin/bash
+# Spatial convergence study: steady manufactured solution (omega = 0),
+# mesh refined from 64^2 to 512^2. Writes convergence.csv.
+
+# In-place sed that works with both GNU (Linux) and BSD (macOS) sed
+sedi() { sed -i.bak "$@" && rm -f "${!#}.bak"; }
+
 echo 'N, error' > convergence.csv
 
-
-sed -i '' "8s/.*/0;/" T.inp
-#sed -i '' "8s/omega/0/" T.inp	    
-
-#sed -i '' "6s/.*/dt/" ControlDict.inp
-sed -i '' "6s/.*/0.5;/" ControlDict.inp	 
+sedi "8s/.*/0;/" T.inp               # omega = 0
+sedi "6s/.*/0.5;/" ControlDict.inp   # dt
 
 for N in 64 128 256 512; do
-	sed -i '' "2s/^[0-9]*/$N/" Mesh.inp  # Nx on line 2
-	sed -i '' "4s/^[0-9]*/$N/" Mesh.inp  # Ny on line 4
-    
- 	output=$(./main_SE)
- 	echo "$output"
+  sedi "2s/^[0-9]*/$N/" Mesh.inp     # Nx on line 2
+  sedi "4s/^[0-9]*/$N/" Mesh.inp     # Ny on line 4
 
- 	error=$(echo "$output" | grep "ERROR=" | cut -d'=' -f2)
+  output=$(./main_SE)
+  echo "$output"
+
+  error=$(echo "$output" | grep "ERROR=" | cut -d'=' -f2)
   echo "$N,$error" >> convergence.csv
- 	
-	# mv xc.dat xc_N${N}.dat
-	# mv yc.dat yc_N${N}.dat
-	# mv c.dat c_N${N}.dat
-
 done
