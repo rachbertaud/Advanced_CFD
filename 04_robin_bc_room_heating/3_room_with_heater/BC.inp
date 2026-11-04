@@ -21,8 +21,8 @@ h
 k
 0.026; // thermal conductivity of air
 h1
-3.5;
+4.58; // x position of heater center, m
 h2
-2.71;
+2.71; // y position of heater center, m
 
 
