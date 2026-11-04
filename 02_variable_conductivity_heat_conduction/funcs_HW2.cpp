@@ -1,3 +1,4 @@
+#include <cmath>
 #include <fstream> 	// helps us read files
 #include <iostream> 	//needed for cout
 #include <sstream> 	// needed for stringstream

@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Header_SpatError.H"
 #include "Header_VolSF.H"
 #include "Header_Mesh.H"

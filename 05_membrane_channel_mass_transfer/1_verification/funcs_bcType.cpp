@@ -1,3 +1,4 @@
+#include <cmath>
 #include <sstream> 	// needed for stringstream
 #include <string> 	//needed for string 
 #include <map>		// for variable map definition

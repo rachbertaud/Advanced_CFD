@@ -1,3 +1,4 @@
+#include <cmath>
 #include <vector>
 
 #include "Header_matrix.H"	// for builder funcs/structs
