@@ -32,7 +32,7 @@ Every solver is checked against a manufactured or analytical solution and mesh r
 | [`05_membrane_channel_mass_transfer`](05_membrane_channel_mass_transfer) | Solute transport in a channel with permeable walls | Advection-dominated flow (diffusivity down to 1e-12), comparison of outflow boundary conditions |
 | [`06_transient_advection_diffusion`](06_transient_advection_diffusion) | 2D transient advection-diffusion | Implicit time stepping, factor once and reuse the matrix, spatial and temporal convergence studies |
 
-Each folder has its own README with the governing equations, how to run it and the results.
+Each folder has its own README with the governing equations and how to run it. Results are included in respective writeup pdfs.
 
 ## Building
 
