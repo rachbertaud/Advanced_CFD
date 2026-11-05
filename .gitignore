@@ -1,0 +1,17 @@
+# Build outputs
+main
+main_SE
+main_TE
+run_*
+*.o
+
+# Solver output
+*.dat
+T_*
+*.csv
+!01_finite_difference_convergence/HW1_Error_Data.csv
+
+# Editor and OS files
+.DS_Store
+*.asv
+*.bak
